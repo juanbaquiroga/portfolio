@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'i.postimg.cc'
-    ]
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'i.postimg.cc',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   }
 }
   
