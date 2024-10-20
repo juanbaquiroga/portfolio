@@ -118,10 +118,13 @@ export const Technologies = () => {
         const fetchData = async () => {
           try {
             const querySnapshot = await getDocs(collection(db, "technologies"));
-            const documents = querySnapshot.docs.map((doc) => ({
-              id: doc.id, 
-              ...doc.data() as Item
-            }));
+            const documents = querySnapshot.docs.map((doc) => {
+                const data = doc.data() as Item;
+                return {
+                  ...data,
+                  id: doc.id,
+                };
+              });
             console.log(documents);
             setItems(documents);
           } catch (error) {

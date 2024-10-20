@@ -60,10 +60,14 @@ export const Projects =()=>{
       const fetchData = async () => {
         try {
           const querySnapshot = await getDocs(collection(db, "projects"));
-          const documents = querySnapshot.docs.map((doc) => ({
-            id: doc.id, 
-            ...doc.data() as Item
-          }));
+          const documents = querySnapshot.docs.map((doc) => {
+            const data = doc.data() as Item;
+            
+            return {
+              ...data,
+              id: doc.id,
+            };
+          });
           console.log(documents);
           setProjects(documents);
         } catch (error) {
