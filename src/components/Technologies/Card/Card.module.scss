@@ -1,0 +1,25 @@
+@use "@/styles/variables.scss";
+.card {
+    height: 180px;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px solid rgba(160, 127, 117, 0.60);
+    background: rgba(160, 127, 117, 0.10);
+    backdrop-filter: blur(5px);
+    border-radius: 20%;
+    
+
+    .svg{
+        height: 80%;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .path{
+            color: variables.$text-color;
+            fill: variables.$text-color;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+@use "@/styles/variables.scss";
+
+
+.svg {
+    height: 15vh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .draw{
+        stroke: variables.$accent-color;
+        stroke-width: 11px;
+        fill: transparent;
+        stroke-dasharray: 3500;
+        stroke-linecap: round;
+    }
+}
