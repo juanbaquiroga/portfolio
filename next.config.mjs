@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domain: [
+    domains: [
       'i.postimg.cc'
     ]
   }
