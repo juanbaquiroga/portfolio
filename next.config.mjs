@@ -4,6 +4,8 @@ const nextConfig = {
     domains: [
       "i.postimg.cc"
     ]
+  }
 }
+  
 
 export default nextConfig;
