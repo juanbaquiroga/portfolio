@@ -3,10 +3,13 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
-        {
-                hostname: 'i.postimg.cc',
-            },
-        ],
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   }
 }
   
