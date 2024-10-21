@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+<<<<<<< HEAD
   reactStrictMode: true,
   images: {
     remotePatterns: [
@@ -10,8 +11,8 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+>>>>>>> 73b33a6 (merge)
   }
-}
   
 
 export default nextConfig;
