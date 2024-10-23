@@ -1,0 +1,38 @@
+.scroller {
+    position: relative;
+    width: 100vw;
+    max-width: 2000px;
+    height: 10vw;
+    min-height: 8rem;
+    max-height: 12rem;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+}
+
+.scrollerList {
+    display: flex;
+    min-width: max-content;
+    gap: 1rem;
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.animateScroll {
+    animation: scroll var(--animation-duration) var(--animation-direction) linear infinite;
+}
+
+.pause{
+    animation-play-state: paused;
+}
+
+
+@keyframes scroll {
+    to {
+    transform: translateX(-50%);
+    }
+}
+
+.card {
+    list-style: none;
+}

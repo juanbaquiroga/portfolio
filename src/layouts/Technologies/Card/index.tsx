@@ -1,14 +1,14 @@
 "use client";
 import { motion } from "framer-motion";
 import styles from "./Card.module.scss";
-import { Item } from "..";
+import { Itechnologie } from "@/interfaces/technologie.interface";
 
-export const Card = (item: Item) => {
+export const Card = ({ id, title, d, viewbox }: Itechnologie) => {
     return (
         <>
             <motion.div
-                key={item.id}
-                layoutId={item.id}
+                key={id}
+                layoutId={id}
                 className={styles.card}
                 transition={{
                     type: "spring",
@@ -18,8 +18,8 @@ export const Card = (item: Item) => {
                 }}
                 whileHover={{ scale: 1.009 }}
             >
-                <motion.svg className={styles.svg} viewBox={item.viewbox}>
-                    <motion.path className={styles.path} d={item.d}></motion.path>
+                <motion.svg className={styles.svg} viewBox={viewbox}>
+                    <motion.path className={styles.path} d={d}></motion.path>
                 </motion.svg>
             </motion.div>
         </>

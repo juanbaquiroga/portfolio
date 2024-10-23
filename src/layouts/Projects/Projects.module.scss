@@ -16,22 +16,6 @@
         align-items: center;
         position: relative;
         gap: 3rem;
-
-        .svg {
-            height: 15vh;
-            width: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-    
-            .draw{
-                stroke: variables.$accent-color;
-                stroke-width: 11px;
-                fill: transparent;
-                stroke-dasharray: 2000;
-                stroke-linecap: round;
-            }
-        }
     
         .projectsContainer{
             display: flex;

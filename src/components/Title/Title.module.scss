@@ -7,12 +7,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
 
     .draw{
-        stroke: variables.$accent-color;
-        stroke-width: 11px;
         fill: transparent;
-        stroke-dasharray: 3500;
         stroke-linecap: round;
+        stroke-linejoin: round;
+        display: grid;
+        place-items: center;
+    }
+    .accent{
+        stroke: variables.$accent-color;
+    }
+    .color2{
+        stroke: variables.$color-2;
     }
 }

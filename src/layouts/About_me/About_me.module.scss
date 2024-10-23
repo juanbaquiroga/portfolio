@@ -57,18 +57,5 @@
             }
         }
     }
-    
-    .svg {
-        width: auto;
-        height: 15%;
 
-        z-index: 0;
-        .draw{
-            stroke: variables.$color-2;
-            stroke-width: 14px;
-            fill: transparent;
-            stroke-dasharray: 2200;
-            stroke-linecap: round;
-        }
-    }
 }

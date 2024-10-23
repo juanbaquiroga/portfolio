@@ -1,9 +1,10 @@
-import { Main } from "@/components/Main"
-import { About_me } from "@/components/About_me";
-import Sidebar from "@/components/Sidebar";
+import { Main } from "@/layouts/Main"
+import { About_me } from "@/layouts/About_me";
+import Sidebar from "@/layouts/Sidebar";
 import { Background } from "@/components/Background";
-import { Projects } from "@/components/Projects";
-import { Technologies } from "@/components/Technologies";
+import { Projects } from "@/layouts/Projects";
+import { Technologies } from "@/layouts/Technologies";
+import { Contact } from "@/layouts/Contact";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
     <About_me/>
     <Projects/>
     <Technologies/>
+    <Contact/>
     <div style={{"height":"100vh"}}>
     </div>
     </>
