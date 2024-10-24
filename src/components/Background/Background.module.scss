@@ -20,7 +20,7 @@
   width: 100vw;
   height: 100vh;
     pointer-events: none; // Evita que las partículas interfieran con otros elementos
-    z-index: -1; // Para que estén detrás del contenido
+    z-index: -2; // Para que estén detrás del contenido
   }
   
   .particle {

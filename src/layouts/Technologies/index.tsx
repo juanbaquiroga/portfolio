@@ -46,7 +46,7 @@ export const Technologies = () => {
 
   return(
     <>
-      <section className={styles.technologies}>
+      <section id="technologies" className={styles.technologies}>
         <div className={styles.container}>
           <motion.div className={styles.textContainer}>
             <Title title={title}/>

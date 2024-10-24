@@ -83,7 +83,7 @@ export const Contact = () =>{
 
     return(
       <>
-        <section id="about_me" className={styles.about_me}>
+        <section id="contact" className={styles.contact}>
           <motion.div className={styles.container}>
             <Title title={title}/>
             <motion.h2 

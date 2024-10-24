@@ -9,7 +9,7 @@ export const Main = () =>{
 
     return(
         <>
-            <main className={styles.main}>
+            <main id='main' className={styles.main}>
                 <motion.svg
                 initial={{opacity:0}}
                 animate={{ scale: [0.0,0, 1.1, 1], opacity:[0,0, 1, 1] }}
