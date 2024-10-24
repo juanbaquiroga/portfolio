@@ -5,6 +5,7 @@ import { Background } from "@/components/Background";
 import { Projects } from "@/layouts/Projects";
 import { Technologies } from "@/layouts/Technologies";
 import { Contact } from "@/layouts/Contact";
+import { Footer } from "@/layouts/Footer";
 
 export default function Home() {
   return (
@@ -16,8 +17,7 @@ export default function Home() {
     <Projects/>
     <Technologies/>
     <Contact/>
-    <div style={{"height":"100vh"}}>
-    </div>
+    <Footer/>
     </>
   );
 }

@@ -1,6 +1,6 @@
 "use client"
 import styles from "./Projects.module.scss"
-import {motion, AnimatePresence, useScroll, useTransform, useInView} from "framer-motion"
+import {motion, AnimatePresence, useInView} from "framer-motion"
 import { useEffect, useRef, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";

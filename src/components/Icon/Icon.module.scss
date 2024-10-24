@@ -1,0 +1,21 @@
+@use "@/styles/variables.scss";
+
+.container{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 2rem;
+    border: .25px solid rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(2.5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    .svg{
+        height: 60%;
+        .path{
+            color: variables.$accent-color;
+        }
+    }
+}
