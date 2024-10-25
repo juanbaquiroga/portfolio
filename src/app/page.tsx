@@ -7,7 +7,7 @@ import { Projects } from "@/layouts/Projects";
 import { Technologies } from "@/layouts/Technologies";
 import { Contact } from "@/layouts/Contact";
 import { Footer } from "@/layouts/Footer";
-import "../middleware.ts"
+import "@/middleware/middleware"
 
 export default function Home() {
 
