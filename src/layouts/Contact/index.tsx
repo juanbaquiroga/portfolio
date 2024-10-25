@@ -16,7 +16,15 @@ const title:Ititle = {
 
 export const Contact = () =>{
     const subtitleRef = useRef(null)
+    const nameRef = useRef(null)
+    const emailRef = useRef(null)
+    const messageRef = useRef(null)
+    const buttonRef = useRef(null)
     const subtitleInView = useInView(subtitleRef, { once: false , margin: "100000px 0px -100px 0px"})
+    const nameInView = useInView(nameRef, { once: false , margin: "100000px 0px 0px 0px"})
+    const emailInView = useInView(emailRef, { once: false , margin: "100000px 0px 0px 0px"})
+    const messageInView = useInView(messageRef, { once: false , margin: "100000px 0px 0px 0px"})
+    const buttonInView = useInView(buttonRef, { once: false , margin: "100000px 0px 0px 0px"})
     const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
     const [formSubmitted, setFormSubmitted] = useState(false);
     
@@ -98,7 +106,16 @@ export const Contact = () =>{
               >Get in touch with me for any inquiries or collaborations.
             </motion.h2>
             <motion.form className={styles.form} onSubmit={handleSubmit}>
-            <motion.div className={styles.formGroup}>
+            <motion.div 
+              ref={nameRef}
+              className={styles.formGroup}
+              initial= {{scale: 0}}
+              animate={nameInView ?{scale:1}:{scale:0}}
+              style={{
+                  opacity: nameInView ? 1 : 0,
+                  transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)" 
+              }}
+            >
               <motion.label htmlFor='name' className={styles.label}>Name</motion.label>
               <motion.input 
                 className={styles.input} 
@@ -108,7 +125,16 @@ export const Contact = () =>{
                 transition={{ duration: 0.2 }}
               />
             </motion.div>
-            <motion.div className={styles.formGroup}>
+            <motion.div 
+              className={styles.formGroup}
+              ref={emailRef}
+              initial= {{scale: 0}}
+              animate={emailInView ?{scale:1}:{scale:0}}
+              style={{
+                  opacity: emailInView ? 1 : 0,
+                  transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)" 
+              }}
+              >
               <motion.label htmlFor='email' className={styles.label}>Email</motion.label>
               <motion.input 
                 className={styles.input} 
@@ -118,7 +144,16 @@ export const Contact = () =>{
                 transition={{ duration: 0.2 }}
               />
             </motion.div>
-            <motion.div className={styles.formGroup}>
+            <motion.div 
+              className={styles.formGroup}
+              ref={messageRef}
+              initial= {{scale: 0}}
+              animate={messageInView ?{scale:1}:{scale:0}}
+              style={{
+                  opacity: messageInView ? 1 : 0,
+                  transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)" 
+              }}
+            >
               <motion.label htmlFor='message' className={styles.label}>Message</motion.label>
               <motion.textarea 
                 className={styles.message} 
@@ -157,6 +192,13 @@ export const Contact = () =>{
             <motion.button 
               type="submit"
               className={styles.button}
+              ref={buttonRef}
+              initial= {{scale: 0}}
+              animate={buttonInView ?{scale:1}:{scale:0}}
+              style={{
+                  opacity: buttonInView ? 1 : 0,
+                  transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)" 
+              }}
             >
               Submit
             </motion.button>
