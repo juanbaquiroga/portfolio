@@ -73,21 +73,19 @@ export const Slider = ({
         >
             <motion.ul
                 ref={scrollerRef}
-                className={`${styles.scrollerList} ${isInView && styles.animateScroll} ${
-                !isInView && styles.pause
-                }`}
+                className={`${styles.scrollerList} ${styles.animateScroll}`}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                variants={{
+                    visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
+                    hidden: { opacity: 0 }
+                }}
                 
                 
             >
                 {items && [...items, ...items].map((item, idx) => (
                 <motion.li className={styles.card} key={idx}
-                initial= {{scale: 0}}
-                animate={isInView ?{scale:1, opacity:1}:{scale:0, opacity:0}}
-                transition={{
-                    duration: 0.07,
-                    ease: [0.17, 0.55, 0.55, 1], 
-                    delay: idx * 0.04
-                }}
+                variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: 20, opacity: 0 } }}
                 
                 >
                     <Card {...item} />
