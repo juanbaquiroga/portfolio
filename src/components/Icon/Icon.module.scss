@@ -13,9 +13,14 @@
     cursor: pointer;
 
     .svg{
-        height: 60%;
+        height: 70%;
+        transition: all 0.1s;
+        &:hover{
+            transform: scale(1.1);
+        }
         .path{
             color: variables.$accent-color;
+            fill: variables.$accent-color;
         }
     }
 }
