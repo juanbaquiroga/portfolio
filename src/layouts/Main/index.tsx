@@ -1,4 +1,5 @@
 "use client"
+import { Icon } from '@/components/Icon';
 import styles from './Main.module.scss';
 import {motion} from "framer-motion"
 import { Julius_Sans_One } from "next/font/google";
@@ -60,6 +61,11 @@ export const Main = () =>{
                         <h1 className={jls.className}> Juan Bautista Quiroga</h1>
                     </motion.div>
                 </div>
+                <motion.div className={styles.links}>
+                    <Icon icon="instagram" delay={0.25} link="https://instagram.com/juanbaquiroga"></Icon>
+                    <Icon icon="linkedin" delay={0.30} link="https://linkedin.com/in/juanbaquiroga"></Icon>
+                    <Icon icon="github" delay={0.35} link="https://github.com/juanbaquiroga"></Icon>
+                </motion.div>
             </main>
         </>
     )

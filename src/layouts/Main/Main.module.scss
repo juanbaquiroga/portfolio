@@ -90,6 +90,13 @@
         z-index: 0;
         fill: variables.$color-3;
     }
+    .links{
+        position: absolute;
+        bottom: 2.5%;
+        right: 2.5%;
+        display: flex;
+        gap: 0.6rem;
+    }
 }
 .svg {
     position: relative;
