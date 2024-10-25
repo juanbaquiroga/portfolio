@@ -82,7 +82,7 @@ export const Projects =()=>{
           </div>
           <AnimatePresence>
             {selectedId && (
-              <motion.div className={styles.detailContainer} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} onClick={()=> setSelectedId(null)}>
+              <motion.div className={styles.detailContainer}  animate={{opacity:[0, 1]}} exit={{opacity:0}} onClick={()=> setSelectedId(null)}>
                 
                   {projects
                     ?.filter((item) => item.id === selectedId)
