@@ -1,0 +1,119 @@
+@use "@/styles/variables.scss";
+
+.main{
+    height: 100vh;
+    width: 100%;
+    //background-color: variables.$bg-color;
+    //background-image: linear-gradient(180deg, variables.$bg-color 0vh, variables.$bg-color 100vh, transparent 115vh);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+
+    .container{
+        height: 70%;
+        display: grid;
+        place-items: center;
+        position:relative;
+        width: 100%;
+        .svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 100%;
+            z-index: 0;
+
+            .draw{
+                stroke: variables.$accent-color;
+                stroke-width: 12px;
+                fill: transparent;
+                stroke-dasharray: 2000;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                // animation: animate 5s linear;
+            }
+              
+            .animate {
+            stroke-dashoffset: 0;
+            }
+        }
+
+        .nameContainer{
+            background: rgba( 255, 255, 255, 0.2 );
+            backdrop-filter: blur( 6px );
+            -webkit-backdrop-filter: blur( 6px );
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            color: #000000;
+            padding: 5px 12px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            max-width: none;
+
+            h1{
+                font-size: clamp(0.5rem, 2.5vw, 3.5rem);
+
+                text-align: center;
+                line-height: 1;
+            }
+        }
+    }
+    .backgroundSvg1{
+        position: absolute;
+        bottom: -5%;
+        left: -10%;
+        width: 30vw;
+        height: fit-content;
+        z-index: 0;
+        fill: variables.$color-3;
+    }
+    .backgroundSvg2{
+        position: absolute;
+        top: -7vw;
+        left: -7vw;
+        height: 21vw;
+        width: 22vw;
+        z-index: 0;
+        fill: variables.$color-2;
+    }
+    .backgroundSvg3{
+        position: absolute;
+        top: -10%;
+        right: -5%;
+        width: 30vw;
+        max-width: 45vh;
+        height: fit-content;
+        z-index: 0;
+        fill: variables.$color-3;
+    }
+    .links{
+        position: absolute;
+        bottom: 2.5%;
+        right: 2.5%;
+        display: flex;
+        gap: 0.6rem;
+    }
+}
+.svg {
+    position: relative;
+    width: 50%;
+    height: auto;
+    z-index: 0;
+
+    .draw{
+        stroke: variables.$accent-color;
+        stroke-width: 10px;
+        fill: transparent;
+        stroke-dasharray: 2000;
+        stroke-linecap: round;
+        // animation: animate 5s linear;
+    }
+      
+    .animate {
+    stroke-dashoffset: 0;
+    }
+}
+
+
