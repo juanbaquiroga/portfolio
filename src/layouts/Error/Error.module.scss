@@ -52,9 +52,8 @@
             border: 1px solid rgba( 255, 255, 255, 0.18 );
             max-width: none;
 
-            h1{
-                font-size: clamp(0.5rem, 2.5vw, 3.5rem);
-
+            .h1{
+                font-size: clamp(1.5rem, 2.5vw, 3.5rem);
                 text-align: center;
                 line-height: 1;
             }
@@ -68,6 +67,7 @@
         height: fit-content;
         z-index: 0;
         fill: variables.$color-3;
+        overflow: hidden;
     }
     .backgroundSvg2{
         position: absolute;
