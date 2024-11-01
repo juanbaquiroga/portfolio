@@ -60,13 +60,17 @@
     .button {
       color: red;
       display: flex;
-      height: 2rem;
-      background-color: red;
+      height: 5rem;
+      background-color: variables.$color-2;
+      align-items: center;
+      padding: 0 1.5rem;
+      border-radius: 1.75rem;
+      color: variables.$text-color;
 
       .svg {
         height: 1rem;
         width: 1rem;
-
+        margin-right: .5rem;
         path {
           height: 100%;
           width: 100%;
