@@ -3,11 +3,11 @@
 
 .svg {
     height: 15vh;
+    min-height: 75px;
     width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
 
     .draw{
         fill: transparent;

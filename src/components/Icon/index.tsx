@@ -1,3 +1,4 @@
+"use client"
 import { motion, useInView } from "framer-motion";
 import styles from "./Icon.module.scss";
 import { useRef } from "react";

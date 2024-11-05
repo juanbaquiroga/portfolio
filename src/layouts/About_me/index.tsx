@@ -68,11 +68,7 @@ export const About_me = () => {
                                 }}
                                 className={styles.text}
                             >
-                                Throughout my career, I have contributed to the development and
-                                maintenance of multiple web platforms, ensuring optimal
-                                performance and user experience. I have a solid foundation in
-                                both front-end and back-end development. Let's connect and build
-                                something amazing together!
+                                Throughout my career, I have contributed to the development and maintenance of several web platforms, ensuring optimal performance and user experience. I have a solid foundation in both front-end and back-end development. Let's connect and build something amazing together!
                             </motion.p>
 
                             <motion.p
@@ -85,10 +81,7 @@ export const About_me = () => {
                                 }}
                                 className={styles.text}
                             >
-                                I'm a Junior Full Stack Developer passionate about building web
-                                solutions. Proficient in HTML, CSS, JavaScript, React.js, and
-                                Next.js, I thrive in both front-end and back-end development. I
-                                love learning and collaborating on innovative projects.
+                                I'm a junior full-stack developer with a passion for building web solutions. Proficient in HTML, CSS, JavaScript, React.js, and Next.js, I thrive in both front-end and back-end development. I love to learn and collaborate on innovative projects.
                             </motion.p>
                         </div>
                     </motion.div>

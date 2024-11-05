@@ -12,18 +12,16 @@
     height: 80%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    gap: 2em;
     background-color: variables.$accent-color;
-    // box-shadow: 0 0 100px 100px variables.$bg-color;
 
     .interiorContainer {
       width: 80%;
       max-width: 1400px;
-      height: 80%;
-      padding: 2em;
+      height: 75%;
+      padding: .5em;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -42,17 +40,22 @@
         .text {
           width: 100%;
           color: variables.$color-2;
-          font-size: clamp(0.5rem, 0.2882rem + 1.1294vw, 1.7rem);
+          font-size: clamp(0.3rem, 0.3rem + 1.5vh, 1.4rem);
           line-height: 1.35;
           font-weight: 300;
         }
       }
-
-      .photo {
-        width: 100%;
-        height: auto;
-        max-width: 300px;
-        border-radius: 5px;
+      .photoContainer{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .photo {
+          height: 80%;
+          width: auto;
+          max-width: 300px;
+          border-radius: 5px;
+        }
       }
 
     }
@@ -60,7 +63,7 @@
     .button {
       color: red;
       display: flex;
-      height: 5rem;
+      height: 2.5rem;
       background-color: variables.$color-2;
       align-items: center;
       padding: 0 1.5rem;
