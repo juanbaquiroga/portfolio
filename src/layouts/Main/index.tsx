@@ -58,7 +58,7 @@ export const Main = () =>{
                     animate={{ scale: [0.0, 1.1, 1], opacity:[0, 1, 1] }}
                     transition={{ duration: 0.3, delay: 1.2 }}
                     className={styles.nameContainer}>
-                        <h1 className={jls.className}> Juan Bautista Quiroga</h1>
+                        <h1 className={jls.className}>Juan Bautista Quiroga</h1>
                     </motion.div>
                 </div>
                 <motion.div className={styles.links}>
