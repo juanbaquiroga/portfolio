@@ -66,9 +66,8 @@
             padding: 0;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(2.5px);
-            
+            backdrop-filter: blur(3px);
+
             .detail{
                 position: absolute;
                 z-index: 4;
@@ -79,9 +78,9 @@
                 align-items: center;
                 border-radius: 1.75rem;
                 padding: 0 0 .75rem 0;
-                border: .25rem solid rgba(255, 255, 255, 0.75);
+                border: .25rem solid rgba(255, 255, 255, 0.9);
                 background: rgba(255, 255, 255, 0.8);
-                backdrop-filter: blur(2.5px);
+                backdrop-filter: blur(3px);
                 pointer-events: all;
                 gap: 1rem;
     
