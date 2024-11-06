@@ -19,51 +19,57 @@ const title:Ititle = {
 
 export const Technologies = () => {
 
-  const subtitleRef = useRef(null)
-  const [items, setItems] = useState<Itechnology[] | null>(null)
-  const subtitleInView = useInView(subtitleRef, { once: false , margin: "100000px 0px -100px 0px"})
+    const subtitleRef = useRef(null)
+    const [firstHalf, setFirstHalf] = useState<Itechnology[] | null>(null);
+    const [secondHalf, setSecondHalf] = useState<Itechnology[] | null>(null);
+    const subtitleInView = useInView(subtitleRef, { once: false , margin: "100000px 0px -100px 0px"})
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "technologies"));
-        const documents = querySnapshot.docs.map((doc) => {
-          const data = doc.data() as Itechnology;
-          return {
-            ...data,
-            id: doc.id,
-          };
-        });
-        setItems(documents);
-      } catch (error) {
-        console.error("Error fetching technologies:", error);
-      }
-    };
-    fetchData();
-  }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const querySnapshot = await getDocs(collection(db, "technologies"));
+            const documents = querySnapshot.docs.map((doc) => {
+            const data = doc.data() as Itechnology;
+            return {
+                ...data,
+                id: doc.id,
+            };
+            });
+            const half = Math.ceil(documents.length / 2);
+            setFirstHalf(documents.slice(0, half));
+            setSecondHalf(documents.slice(half));
+
+        } catch (error) {
+            console.error("Error fetching technologies:", error);
+        }
+        };
+        fetchData();
+    }, []);
 
 
-  return(
-    <>
-      <section id="technologies" className={styles.technologies}>
-        <div className={styles.container}>
-          <motion.div className={styles.textContainer}>
-            <Title title={title}/>
-            <motion.h2 
-              className={styles.subtitle}
-              ref={subtitleRef}
-              initial= {{scale: 0}}
-              animate={subtitleInView ?{scale:1}:{scale:0}}
-              style={{
-                  opacity: subtitleInView ? 1 : 0,
-                  transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)" 
-              }}
-              >Tools, frameworks, and languages I use
-            </motion.h2>
-          </motion.div>
-          <Slider items={items} direction="left" speed="normal" />
-        </div>
-      </section>
-    </>
-  )
+
+    return(
+        <>
+        <section id="technologies" className={styles.technologies}>
+            <div className={styles.container}>
+            <motion.div className={styles.textContainer}>
+                <Title title={title}/>
+                <motion.h2 
+                className={styles.subtitle}
+                ref={subtitleRef}
+                initial= {{scale: 0}}
+                animate={subtitleInView ?{scale:1}:{scale:0}}
+                style={{
+                    opacity: subtitleInView ? 1 : 0,
+                    transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)" 
+                }}
+                >Tools, frameworks, and languages I use
+                </motion.h2>
+            </motion.div>
+            <Slider items={firstHalf} direction="left" speed="normal" pauseOnHover={true} />
+            <Slider items={secondHalf} direction="right" speed="normal" pauseOnHover={true} />
+            </div>
+        </section>
+        </>
+    )
 }

@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import styles from "./Slider.module.scss";
-import { Card } from "../Card";
-import { Itechnologie } from "@/interfaces/technologie.interface";
+import { Card } from "./Card";
+import { Itechnology } from "@/interfaces/technology.interface";
 import { motion, useInView } from "framer-motion";
 
 export const Slider = ({
@@ -10,7 +10,7 @@ export const Slider = ({
     direction = "left",
     speed = "fast",
 }: {
-    items: Itechnologie[] | null;
+    items: Itechnology[] | null;
     direction?: "left" | "right";
     speed?: "fast" | "normal" | "slow";
 }) => {

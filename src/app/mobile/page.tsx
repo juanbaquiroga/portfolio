@@ -1,19 +1,22 @@
-import { Main } from "@/layouts/Main"
-import { About_me } from "@/layouts/About_me";
-import Sidebar from "@/layouts/Sidebar";
 import { Background } from "@/components/Background";
-import { Projects } from "@/layouts/Projects";
-import { Technologies } from "@/layouts/Technologies";
-import { Contact } from "@/layouts/Contact";
-import { Footer } from "@/layouts/Footer";
-import { Error } from "@/layouts/Error"
+import { About_me } from "@/mobile/About_me";
+import { Contact } from "@/mobile/Contact";
+import { Footer } from "@/mobile/Footer";
+import { Main } from "@/mobile/Main";
+import { Projects } from "@/mobile/Projects";
+import { Technologies } from "@/mobile/Technologies";
+
 
 export default function Home() {
   return (
     <>
-    {/* <Sidebar/>*/}
-    <Error/>
+    <Main/>
+    <About_me/>
     <Background/> 
+    <Projects/>
+    <Technologies/>
+    <Contact/>
+    <Footer/>
     </>
   );
 }

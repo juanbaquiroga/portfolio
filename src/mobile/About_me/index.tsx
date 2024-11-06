@@ -21,43 +21,28 @@ export const About_me = () => {
     const refButton = useRef(null);
     const imgInView = useInView(refImg, {
         once: false,
-        margin: "100000px 0px -100px 0px",
+        margin: "100000px 0px -50px 0px",
     });
     const textInView1 = useInView(refText1, {
         once: false,
-        margin: "100000px 0px -100px 0px",
+        margin: "100000px 0px -50px 0px",
     });
     const textInView2 = useInView(refText2, {
         once: false,
-        margin: "100000px 0px -100px 0px",
+        margin: "100000px 0px -50px 0px",
     });
     const buttonInView = useInView(refButton, {
         once: false,
-        margin: "100000px 0px -100px 0px",
+        margin: "100000px 0px -50px 0px",
     });
 
     return (
         <>
-            <section id="about-me" className={styles.about_me}>
+            <section id="about_me" className={styles.about_me}>
                 <motion.div className={styles.container}>
                     <Title title={title} />
                     <motion.div className={styles.interiorContainer}>
-                        <motion.div
-                            ref={refImg}
-                            animate={imgInView ? { scale: 1 } : { scale: 0 }}
-                            style={{
-                                opacity: imgInView ? 1 : 0,
-                                transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
-                            }}
-                            className={styles.photoContainer}
-                        >
-                            <Image
-                                className={styles.photo}
-                                src={photo}
-                                alt="picture of myself"
-                            ></Image>
-                        </motion.div>
-                        <div className={styles.textContainer}>
+                        <div className={styles.topContainer}>
                             <motion.p
                                 ref={refText1}
                                 initial={{ scale: 0 }}
@@ -70,7 +55,24 @@ export const About_me = () => {
                             >
                                 Throughout my career, I have contributed to the development and maintenance of several web platforms, ensuring optimal performance and user experience. I have a solid foundation in both front-end and back-end development. Let's connect and build something amazing together!
                             </motion.p>
-
+                        </div>
+                        
+                        <div className={styles.downContainer}>
+                            <motion.div
+                                ref={refImg}
+                                animate={imgInView ? { scale: 1 } : { scale: 0 }}
+                                style={{
+                                    opacity: imgInView ? 1 : 0,
+                                    transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
+                                }}
+                                className={styles.photoContainer}
+                            >
+                                <Image
+                                    className={styles.photo}
+                                    src={photo}
+                                    alt="picture of myself"
+                                ></Image>
+                            </motion.div>
                             <motion.p
                                 ref={refText2}
                                 initial={{ scale: 0 }}

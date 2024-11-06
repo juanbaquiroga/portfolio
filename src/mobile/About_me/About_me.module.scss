@@ -18,44 +18,47 @@
     background-color: variables.$accent-color;
 
     .interiorContainer {
-      width: 80%;
+      width: 90%;
       max-width: 1400px;
       height: 75%;
       padding: .5em;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 2.5%;
+      gap: .75rem;
 
-      .textContainer {
-        width: 52.5%;
-        height: 100%;
+      .topContainer{
+        width: 100%;
+      }
+
+      .downContainer {
+        width: 100%;
+        height: min-content;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        align-items: flex-start;
         justify-content: center;
-        gap: 1em;
+        gap: .75em;
 
-        .text {
-          width: 100%;
-          color: variables.$color-2;
-          font-size: clamp(0.3rem, 0.3rem + 1.5vh, 1.4rem);
-          line-height: 1.35;
-          font-weight: 300;
+        .photoContainer{
+          height: 100%;
+          max-width: 45%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .photo {
+            width: 100%;
+            border-radius: 5px;
+          }
         }
       }
-      .photoContainer{
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .photo {
-          height: 80%;
-          width: auto;
-          max-width: 300px;
-          border-radius: 5px;
-        }
+      .text {
+        width: 100%;
+        color: variables.$color-2;
+        font-size: clamp(0.3rem, 0.3rem + 1.1vh, 1.2rem);
+        line-height: 1.35;
+        font-weight: 300;
       }
 
     }
