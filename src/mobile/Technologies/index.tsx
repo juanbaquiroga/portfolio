@@ -20,7 +20,6 @@ const title:Ititle = {
 export const Technologies = () => {
 
     const subtitleRef = useRef(null)
-    const [items, setItems] = useState<Itechnology[] | null>(null)
     const [firstHalf, setFirstHalf] = useState<Itechnology[] | null>(null);
     const [secondHalf, setSecondHalf] = useState<Itechnology[] | null>(null);
     const subtitleInView = useInView(subtitleRef, { once: false , margin: "100000px 0px -100px 0px"})
@@ -36,7 +35,6 @@ export const Technologies = () => {
                 id: doc.id,
             };
             });
-            setItems(documents);
             const half = Math.ceil(documents.length / 2);
             setFirstHalf(documents.slice(0, half));
             setSecondHalf(documents.slice(half));
