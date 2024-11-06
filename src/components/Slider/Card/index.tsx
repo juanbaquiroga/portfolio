@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import styles from "./Card.module.scss";
-import { Itechnologie } from "@/interfaces/technologie.interface";
+import { Itechnologie } from "@/interfaces/technology.interface";
 
 export const Card = ({ id, title, d, viewbox }: Itechnologie) => {
     return (
