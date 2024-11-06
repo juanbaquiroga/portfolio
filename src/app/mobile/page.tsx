@@ -2,6 +2,7 @@ import { Background } from "@/components/Background";
 import { About_me } from "@/mobile/About_me";
 import { Main } from "@/mobile/Main";
 import { Projects } from "@/mobile/Projects";
+import { Technologies } from "@/mobile/Technologies";
 
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
     <About_me/>
     <Background/> 
     <Projects/>
-    
+    <Technologies/>
     </>
   );
 }

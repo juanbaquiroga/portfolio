@@ -1,0 +1,29 @@
+@use "@/styles/variables.scss";
+
+.technologies{
+    margin-top: 5rem;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .container{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        .textContainer{
+            margin-bottom: 2.5rem;
+            .subtitle{
+                text-align: center;
+                color: variables.$accent-color;
+                font-size: 1.1rem;
+                font-weight: 400;
+            }
+        }
+    }
+}
