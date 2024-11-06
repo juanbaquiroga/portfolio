@@ -54,7 +54,7 @@ export const Footer = () =>{
                             }}
                         >
                             <motion.a href="#main" className={styles.link} variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: 20, opacity: 0 } }}>Portfolio</motion.a>
-                            <motion.a href="#about-me" className={styles.link} variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: 20, opacity: 0 } }}>About Me</motion.a>
+                            <motion.a href="#aboutme" className={styles.link} variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: 20, opacity: 0 } }}>About Me</motion.a>
                             <motion.a href="#projects" className={styles.link} variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: 20, opacity: 0 } }}>Projects</motion.a>
                             <motion.a href="#technologies" className={styles.link} variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: 20, opacity: 0 } }}>Technologies</motion.a>
                             <motion.a href="#contact" className={styles.link} variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: 20, opacity: 0 } }}>Contact</motion.a>

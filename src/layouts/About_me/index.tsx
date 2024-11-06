@@ -38,7 +38,7 @@ export const About_me = () => {
 
     return (
         <>
-            <section id="about-me" className={styles.about_me}>
+            <section id="aboutme" className={styles.about_me}>
                 <motion.div className={styles.container}>
                     <Title title={title} />
                     <motion.div className={styles.interiorContainer}>
