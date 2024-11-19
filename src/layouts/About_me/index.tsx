@@ -53,8 +53,10 @@ export const About_me = () => {
                         >
                             <Image
                                 className={styles.photo}
-                                src={photo}
+                                src="/about-me.png"
                                 alt="picture of myself"
+                                width={4000}
+                                height={9000}
                             ></Image>
                         </motion.div>
                         <div className={styles.textContainer}>
