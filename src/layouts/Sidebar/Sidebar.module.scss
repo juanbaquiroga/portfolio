@@ -1,2 +1,135 @@
 @use "@/styles/variables.scss";
 
+.sidebar {
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  width: 120px;
+  gap: 2rem;
+  background-color: #fffefc;
+  border-radius: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+  .logoContainer {
+    width: 35%;
+    margin-bottom: 1rem;
+
+    .svg {
+      height: auto;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      fill: variables.$accent-color;
+      stroke: variables.$accent-color;
+
+      .pathFill {
+        fill-rule: evenodd;
+        clip-rule: evenodd
+      }
+
+      .path {
+        stroke: variables.$accent-color;
+      }
+    }
+  }
+
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: .5rem;
+
+    .menuItem {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #7c7c7c;
+      cursor: pointer;
+      white-space: nowrap;
+      z-index: 3;
+
+      .letter {
+        color: variables.$accent-color;
+        -webkit-text-stroke: 1.5px variables.$accent-color;
+        z-index: 2;
+      }
+
+      .expand {
+        position: absolute;
+        left: 120px;
+        background: #fffefc;
+        border-radius: 0 40px 40px 0;
+
+        .top {
+          position: absolute;
+          background-color: transparent;
+          bottom: -50px;
+          height: 50px;
+          width: 25px;
+          border-top-left-radius: 25px;
+          box-shadow: 0 -25px 0 0 #fffefc;
+          transform-origin: top;
+
+        }
+
+        .bottom {
+          position: absolute;
+          background-color: transparent;
+          top: -50px;
+          height: 50px;
+          width: 25px;
+          border-bottom-left-radius: 25px;
+          box-shadow: 0 25px 0 0 #fffefc;
+          transform-origin: bottom;
+        }
+      }
+    }
+  }
+
+  .languages {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    span {
+      font-size: 14px;
+      color: #a67a73;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.activeZone {
+  position: fixed;
+  top: 50%;
+  /* Centra el área activa verticalmente */
+  left: 0;
+  transform: translateY(-50%);
+  height: 40%;
+  /* Ajusta la altura de la zona activa */
+  width: 25px;
+  /* Un área pequeña para detectar el hover */
+  z-index: 1;
+  pointer-events: auto;
+  /* Asegura que el mouse detecte esta zona */
+}
