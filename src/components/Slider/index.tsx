@@ -14,6 +14,7 @@ export const Slider = ({
     items: Itechnology[] | null;
     direction?: "left" | "right";
     speed?: "fast" | "normal" | "slow";
+    pauseOnHover?: boolean;
 }) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const scrollerRef = React.useRef<HTMLUListElement>(null);
