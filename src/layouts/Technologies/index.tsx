@@ -61,7 +61,7 @@ export const Technologies = () => {
               >Tools, frameworks, and languages I use
             </motion.h2>
           </div>
-          <Slider items={items} direction="left" speed="normal" pauseOnHover={true} />
+          <Slider items={items} direction="left" speed="normal" />
         </div>
       </section>
     </>
