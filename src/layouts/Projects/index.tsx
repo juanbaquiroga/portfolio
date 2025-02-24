@@ -90,11 +90,11 @@ export const Projects =()=>{
                       <motion.div key={item.id} layoutId={selectedId} className={styles.detail} onClick={(e) => e.stopPropagation()} >
 
                         <motion.img className={styles.img} src={item.img} alt={item.title}></motion.img>
-                        <motion.div className={styles.textContainer}>
-                          <motion.h2 className={styles.title}>{item.title}</motion.h2>
-                          <motion.p className={styles.description}>{item.description}</motion.p>
-                        </motion.div>
-                        <motion.div className={styles.buttonsContainer}>
+                        <div className={styles.textContainer}>
+                          <h2 className={styles.title}>{item.title}</h2>
+                          <p className={styles.description}>{item.description}</p>
+                        </div>
+                        <div className={styles.buttonsContainer}>
                           {item.github?
                           <motion.a
                             href={item.github} 
@@ -113,12 +113,12 @@ export const Projects =()=>{
                             transition={{ type: "spring", stiffness: 400, damping: 16}}
                             >Web
                           </motion.a>:<></>}
-                        </motion.div>
-                        <motion.button className={styles.exit} onClick={() => setSelectedId(null)}>
-                          <motion.svg className={styles.svg} viewBox="0 0 384 512">
-                            <motion.path className={styles.path} d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
-                          </motion.svg>
-                        </motion.button>
+                        </div>
+                        <button className={styles.exit} onClick={() => setSelectedId(null)}>
+                          <svg className={styles.svg} viewBox="0 0 384 512">
+                            <path className={styles.path} d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
+                          </svg>
+                        </button>
                         </motion.div>
                     ))
                   }

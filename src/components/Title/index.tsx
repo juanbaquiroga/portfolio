@@ -43,7 +43,7 @@ export const Title = ({ title }: { title: Ititle }) => {
     const colorClass = color === "accent" ? styles.accent : styles.color2;
 
     return (
-        <motion.svg ref={ref} className={styles.svg} viewBox={viewBox}>
+        <svg ref={ref} className={styles.svg} viewBox={viewBox}>
             <motion.path
                 initial={{ strokeDashoffset: strokeDash }}
                 animate={isInView ? { strokeDashoffset: 0 } : { strokeDashoffset: strokeDash }} 
@@ -52,6 +52,6 @@ export const Title = ({ title }: { title: Ititle }) => {
                 className={`${styles.draw} ${colorClass}`}
                 d={d}
             />
-        </motion.svg>
+        </svg>
     );
 };

@@ -38,10 +38,10 @@ export const About_me = () => {
 
     return (
         <>
-            <section id="aboutme" className={styles.about_me}>
-                <motion.div className={styles.container}>
+            <section id="about-me" className={styles.about_me}>
+                <div className={styles.container}>
                     <Title title={title} />
-                    <motion.div className={styles.interiorContainer}>
+                    <div className={styles.interiorContainer}>
                         <motion.div
                             ref={refImg}
                             animate={imgInView ? { scale: 1 } : { scale: 0 }}
@@ -53,8 +53,10 @@ export const About_me = () => {
                         >
                             <Image
                                 className={styles.photo}
-                                src={photo}
+                                src="/about-me.png"
                                 alt="picture of myself"
+                                width={4000}
+                                height={9000}
                             ></Image>
                         </motion.div>
                         <div className={styles.textContainer}>
@@ -84,7 +86,7 @@ export const About_me = () => {
                                 I'm a junior full-stack developer with a passion for building web solutions. Proficient in HTML, CSS, JavaScript, React.js, and Next.js, I thrive in both front-end and back-end development. I love to learn and collaborate on innovative projects.
                             </motion.p>
                         </div>
-                    </motion.div>
+                    </div>
                     <motion.a
                         href="https://drive.google.com/uc?export=download&id=11h7PnlvkQVuhTTJpvTA4wkilR5dVrWzp"
                         target="_blank"
@@ -102,7 +104,7 @@ export const About_me = () => {
                         </svg>
                         Resume
                     </motion.a>
-                </motion.div>
+                </div>
             </section>
         </>
     );

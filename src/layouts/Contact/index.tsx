@@ -107,7 +107,7 @@ export const Contact = () => {
     return (
         <>
             <section id="contact" className={styles.contact}>
-                <motion.div className={styles.container}>
+                <div className={styles.container}>
                     <Title title={title} />
                     <motion.h2
                         className={styles.subtitle}
@@ -121,7 +121,7 @@ export const Contact = () => {
                     >
                         Get in touch with me for any inquiries or collaborations.
                     </motion.h2>
-                    <motion.form className={styles.form} onSubmit={handleSubmit}>
+                    <form className={styles.form} onSubmit={handleSubmit}>
                         <motion.div
                             ref={nameRef}
                             className={styles.formGroup}
@@ -132,9 +132,9 @@ export const Contact = () => {
                                 transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
                             }}
                         >
-                            <motion.label htmlFor="name" className={styles.label}>
+                            <label htmlFor="name" className={styles.label}>
                                 Name
-                            </motion.label>
+                            </label>
                             <motion.input
                                 className={styles.input}
                                 type="text"
@@ -153,9 +153,9 @@ export const Contact = () => {
                                 transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
                             }}
                         >
-                            <motion.label htmlFor="email" className={styles.label}>
+                            <label htmlFor="email" className={styles.label}>
                                 Email
-                            </motion.label>
+                            </label>
                             <motion.input
                                 className={styles.input}
                                 type="email"
@@ -174,9 +174,9 @@ export const Contact = () => {
                                 transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
                             }}
                         >
-                            <motion.label htmlFor="message" className={styles.label}>
+                            <label htmlFor="message" className={styles.label}>
                                 Message
-                            </motion.label>
+                            </label>
                             <motion.textarea
                                 className={styles.message}
                                 name="message"
@@ -185,7 +185,7 @@ export const Contact = () => {
                                 transition={{ duration: 0.2 }}
                             />
                         </motion.div>
-                        <motion.div className={styles.errorContainer}>
+                        <div className={styles.errorContainer}>
                             {errors.name && (
                                 <motion.p
                                     initial={{ opacity: 0 }}
@@ -216,7 +216,7 @@ export const Contact = () => {
                                     * {errors.message}
                                 </motion.p>
                             )}
-                        </motion.div>
+                        </div>
                         <motion.button
                             type="submit"
                             className={styles.button}
@@ -230,8 +230,8 @@ export const Contact = () => {
                         >
                             Submit
                         </motion.button>
-                    </motion.form>
-                </motion.div>
+                    </form>
+                </div>
             </section>
             {formSubmitted && (
                 <motion.div
