@@ -18,9 +18,9 @@ export const Card = ({ id, title, d, viewbox }: Itechnology) => {
                 }}
                 whileHover={{ scale: 1.009 }}
             >
-                <motion.svg className={styles.svg} viewBox={viewbox}>
-                    <motion.path className={styles.path} d={d}></motion.path>
-                </motion.svg>
+                <svg className={styles.svg} viewBox={viewbox}>
+                    <path className={styles.path} d={d}></path>
+                </svg>
             </motion.div>
         </>
     );

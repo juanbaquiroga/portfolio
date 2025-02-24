@@ -47,7 +47,7 @@ export const Technologies = () => {
     <>
       <section id="technologies" className={styles.technologies}>
         <div className={styles.container}>
-          <motion.div className={styles.textContainer}>
+          <div className={styles.textContainer}>
             <Title title={title}/>
             <motion.h2 
               className={styles.subtitle}
@@ -60,7 +60,7 @@ export const Technologies = () => {
               }}
               >Tools, frameworks, and languages I use
             </motion.h2>
-          </motion.div>
+          </div>
           <Slider items={items} direction="left" speed="normal" pauseOnHover={true} />
         </div>
       </section>
