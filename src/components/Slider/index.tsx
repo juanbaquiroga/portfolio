@@ -9,6 +9,7 @@ export const Slider = ({
     items,
     direction = "left",
     speed = "fast",
+    pauseOnHover = false,
 }: {
     items: Itechnology[] | null;
     direction?: "left" | "right";
