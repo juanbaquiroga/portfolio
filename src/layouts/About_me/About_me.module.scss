@@ -61,7 +61,6 @@
     }
 
     .button {
-      color: red;
       display: flex;
       height: 2.5rem;
       background-color: variables.$color-2;
@@ -74,10 +73,10 @@
         height: 1rem;
         width: 1rem;
         margin-right: .5rem;
-        path {
+        .path {
           height: 100%;
           width: 100%;
-          color: green;
+          fill: variables.$text-color;
         }
       }
     }
