@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./Sidebar.module.scss";
 import { Julius_Sans_One } from "next/font/google";
@@ -16,6 +16,12 @@ const menuItems = [
 const Sidebar = () => {
     const [active, setActive] = useState<Number | null>(null);
     const [isVisible, setIsVisible] = useState(false);
+    const [show, setShow] = useState(false);
+    useEffect(() => {
+    const timer = setTimeout(() => setShow(true), 2000);
+    return () => clearTimeout(timer);
+    }, []);
+
     return (
         <>
             <motion.div
@@ -25,11 +31,10 @@ const Sidebar = () => {
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 style={
                     isVisible
-                        ? { background: "transparent", y: "-50%" }
+                        ? { background: "transparent"}
                         : {
                               background:
                                   "radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.26) 0%, transparent 70%)",
-                              y: "-50%",
                           }
                 }
             ></motion.div>
@@ -41,6 +46,7 @@ const Sidebar = () => {
                     y: "-50%",
                     x: isVisible ? 0 : "-150%",
                 }}
+                style={{display: show? "flex" : "none"}}
             >
                 {/* Logo */}
                 <div className={styles.logoContainer}>

@@ -122,14 +122,11 @@
 .activeZone {
   position: fixed;
   top: 50%;
-  /* Centra el área activa verticalmente */
   left: 0;
   transform: translateY(-50%);
   height: 40%;
-  /* Ajusta la altura de la zona activa */
   width: 25px;
-  /* Un área pequeña para detectar el hover */
   z-index: 1;
   pointer-events: auto;
-  /* Asegura que el mouse detecte esta zona */
 }
+
