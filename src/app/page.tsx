@@ -20,7 +20,7 @@ export default function Home() {
     return (
         <>
             <Background />
-            {/* <Sidebar /> */}
+            <Sidebar />
             <Main />
             <About_me />
             <Projects />
