@@ -6,20 +6,44 @@ import { Julius_Sans_One } from "next/font/google";
 const jls = Julius_Sans_One({ subsets: ["latin"], weight: ["400"] });
 
 const menuItems = [
-    { id: 0, label: "PORTFOLIO" },
-    { id: 1, label: "ABOUT ME" },
-    { id: 2, label: "PROJECTS" },
-    { id: 3, label: "TECHNOLOGIES" },
-    { id: 4, label: "CONTACT" },
+    { id: 0, label: "PORTFOLIO", href: "#main" },
+    { id: 1, label: "ABOUT ME", href: "#about-me"},
+    { id: 2, label: "PROJECTS", href: "#projects" },
+    { id: 3, label: "TECHNOLOGIES", href: "#technologies" },
+    { id: 4, label: "CONTACT", href: "#contact"  },
 ];
 
 const Sidebar = () => {
     const [active, setActive] = useState<Number | null>(null);
     const [isVisible, setIsVisible] = useState(false);
     const [show, setShow] = useState(false);
+
     useEffect(() => {
-    const timer = setTimeout(() => setShow(true), 2000);
-    return () => clearTimeout(timer);
+        const timer = setTimeout(() => setShow(true), 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = menuItems.map(item => document.querySelector(item.href));
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+            sections.forEach((section, index) => {
+                if (section) {
+                    const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+                    const sectionBottom = sectionTop + (section as HTMLElement).offsetHeight;
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        setActive(index);
+                    }
+                }
+            });
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Llamar inicialmente para establecer la sección activa
+
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
@@ -27,14 +51,36 @@ const Sidebar = () => {
             <motion.div
                 className={styles.activeZone}
                 onMouseEnter={() => setIsVisible(true)}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                style={
-                    isVisible
-                        ? { background: "transparent"}
+                initial={{
+                    y: "-50%",
+                    x: "-100%",
+                }}
+                animate={
+                    show
+                       ? isVisible?{
+                           x: "0%",
+                           y: "-50%",
+                           opacity: 0,
+                       }:{
+                           y: "-50%",
+                           x: "0%",
+                           background: ["radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.26) 0%, transparent 70%)", " radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.35) 0%, transparent 50%)", "radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.26) 0%, transparent 70%)"],
+                       }:
+                       {
+                           y: "-50%",
+                           x: "-100%",
+                       }
+                }
+                transition={
+                    isVisible 
+                        ? { type: "just" }
                         : {
-                              background:
-                                  "radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.26) 0%, transparent 70%)",
-                          }
+                            background: {
+                                repeat: Infinity,
+                                duration: 2,
+                                ease: "easeInOut"
+                            }
+                        }
                 }
             ></motion.div>
             <motion.div
@@ -44,7 +90,7 @@ const Sidebar = () => {
                     y: "-50%",
                     x: isVisible ? 0 : "-150%",
                 }}
-                style={{display: show? "flex" : "none"}}
+                style={show?{display:"flex"}:{display:"none"}}
             >
                 {/* Logo */}
                 <div className={styles.logoContainer}>
@@ -61,15 +107,15 @@ const Sidebar = () => {
                 </div>
 
                 {/* Navigation Menu */}
-                <ul className={styles.menu}>
+                <div className={styles.menu}>
                     {menuItems.map((item) => {
-                        const isActive = active === item.id; // Si el item está activo
+                        const isActive = (active === item.id && isVisible == true);
                         return (
-                            <motion.li
+                            <motion.a
                                 key={item.id}
+                                href={item.href}
                                 className={styles.menuItem}
                                 onMouseEnter={() => setActive(item.id)}
-                                onMouseLeave={() => setActive(null)}
                                 animate={
                                     isActive
                                         ? {
@@ -156,14 +202,15 @@ const Sidebar = () => {
                                         }}
                                     />
                                 </motion.div>
-                            </motion.li>
+                            </motion.a>
                         );
                     })}
-                </ul>
+                </div>
 
                 {/* Language Selector */}
                 <div className={styles.languages}>
-                    <span>EN</span>
+                    <span className={styles.active}>EN</span>
+                    <span>/</span>
                     <span>ES</span>
                 </div>
             </motion.div>

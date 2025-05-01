@@ -7,7 +7,7 @@
   left: 15px;
   transform: translateY(-50%);
   width: 120px;
-  gap: 2rem;
+  gap: 45px;
   background-color: #fffefc;
   border-radius: 60px;
   display: flex;
@@ -19,7 +19,6 @@
 
   .logoContainer {
     width: 35%;
-    margin-bottom: 1rem;
 
     .svg {
       height: auto;
@@ -129,4 +128,3 @@
   z-index: 1;
   pointer-events: auto;
 }
-
