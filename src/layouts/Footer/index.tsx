@@ -32,17 +32,19 @@ export const Footer = () => {
                     { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" }
                 )
             }
-            // Animación de la línea SOLO EN X (corregido)
+            // Animación de la línea
             if (lineRef.current) {
                 gsap.fromTo(lineRef.current,{
-                    scaleX: 0,
+                    scaleY: 0,
+                    scaleX: 1,
                     opacity: 0,
                 }, {
-                    scaleX: 1,
+                    scaleY: 1,
                     opacity: 1,
-                    duration: 0.15,
+                    scaleX: 1,
+                    duration: 0.5,
                     ease: "power2.out",
-                    transformOrigin: "left"
+                    transformOrigin: "center center"
                 })
             }
             // Links animation
@@ -90,7 +92,7 @@ export const Footer = () => {
                 gsap.set(svgRef.current, { scale: 0, opacity: 0 })
             }
             if (lineRef.current) {
-                gsap.set(lineRef.current, { scaleX: 0, opacity: 0, transformOrigin: "center" })
+                gsap.set(lineRef.current, { scaleX: 0, scaleY:0, opacity: 0, transformOrigin: "center" })
             }
             if (linksRef.current) {
                 gsap.set(linksRef.current.children, { y: 20, opacity: 0 })
@@ -126,9 +128,6 @@ export const Footer = () => {
                 <div 
                     ref={lineRef}
                     className={styles.line}
-                    style={{
-                        transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
-                    }}
                 ></div>
                 <div className={styles.box2}>
                     <div className={styles.container1}>
