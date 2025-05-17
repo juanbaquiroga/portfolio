@@ -1,7 +1,7 @@
 "use client";
 import styles from "./Contact.module.scss";
-import { FormEvent, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { FormEvent, useRef, useState, useEffect } from "react";
+import gsap from "gsap";
 import { Ititle } from "@/interfaces/title.interface";
 import { Title } from "@/components/Title";
 
@@ -13,38 +13,80 @@ const title: Ititle = {
     strokeWidth: 9,
 };
 
+function useGsapInView(ref: React.RefObject<HTMLElement>, options: { margin?: string } = {}) {
+    const [inView, setInView] = useState(false);
+    useEffect(() => {
+        const observer = new window.IntersectionObserver(
+            ([entry]) => setInView(entry.isIntersecting),
+            { root: null, rootMargin: options.margin || "0px", threshold: 0 }
+        );
+        if (ref.current) observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, [ref, options.margin]);
+    return inView;
+}
+
 export const Contact = () => {
     const subtitleRef = useRef(null);
     const nameRef = useRef(null);
     const emailRef = useRef(null);
     const messageRef = useRef(null);
     const buttonRef = useRef(null);
-    const subtitleInView = useInView(subtitleRef, {
-        once: false,
-        margin: "100000px 0px -100px 0px",
-    });
-    const nameInView = useInView(nameRef, {
-        once: false,
-        margin: "100000px 0px 0px 0px",
-    });
-    const emailInView = useInView(emailRef, {
-        once: false,
-        margin: "100000px 0px 0px 0px",
-    });
-    const messageInView = useInView(messageRef, {
-        once: false,
-        margin: "100000px 0px 0px 0px",
-    });
-    const buttonInView = useInView(buttonRef, {
-        once: false,
-        margin: "100000px 0px 0px 0px",
-    });
-    const [errors, setErrors] = useState<{
-        name?: string;
-        email?: string;
-        message?: string;
-    }>({});
+    const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
     const [formSubmitted, setFormSubmitted] = useState(false);
+
+    // Detectar si los elementos están en vista
+    const subtitleInView = useGsapInView(subtitleRef, { margin: "100000px 0px -100px 0px" });
+    const nameInView = useGsapInView(nameRef, { margin: "100000px 0px 0px 0px" });
+    const emailInView = useGsapInView(emailRef, { margin: "100000px 0px 0px 0px" });
+    const messageInView = useGsapInView(messageRef, { margin: "100000px 0px 0px 0px" });
+    const buttonInView = useGsapInView(buttonRef, { margin: "100000px 0px 0px 0px" });
+
+    // Animaciones GSAP
+    useEffect(() => {
+        if (subtitleRef.current && subtitleInView) {
+            gsap.fromTo(subtitleRef.current, {scale: 0, opacity: 0}, { scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1.1, 0.8)" });
+        } else {
+            gsap.set(subtitleRef.current, { scale: 0, opacity: 0 });
+        }
+    }, [subtitleInView]);
+    useEffect(() => {
+        if (nameRef.current && nameInView) {
+            gsap.fromTo(nameRef.current, {scale: 0, opacity: 0}, { scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1.1, 0.8)" });
+        } else {
+            gsap.set(nameRef.current, { scale: 0, opacity: 0 });
+        }
+    }, [nameInView]);
+    useEffect(() => {
+        if (emailRef.current && emailInView) {
+            gsap.fromTo(emailRef.current,{scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1.1, 0.8)" });
+        } else {
+            gsap.set(emailRef.current, { scale: 0, opacity: 0 });
+        }
+    }, [emailInView]);
+    useEffect(() => {
+        if (messageRef.current && messageInView) {
+            gsap.fromTo(messageRef.current, { scale: 0, opacity: 0}, {scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1.1, 0.8)"});
+        }else {
+            gsap.set(messageRef.current, { scale: 0, opacity: 0 });
+        }
+    }, [messageInView]);
+    
+    useEffect(() => {
+        if (buttonRef.current && buttonInView) {
+            gsap.fromTo(buttonRef.current, { scale: 0, opacity: 0}, {scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1.1, 0.8)"});
+        }else {
+            gsap.set(buttonRef.current, { scale: 0, opacity: 0 });
+        }
+    }, [buttonInView]);
+
+    // Animación de focus en inputs y textarea
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        gsap.to(e.target, { scale: 1.02, duration: 0.2, ease: "power2.out" });
+    };
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        gsap.to(e.target, { scale: 1, duration: 0.2, ease: "power2.out" });
+    };
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -58,15 +100,12 @@ export const Contact = () => {
         if (!name || name.trim() === "") {
             formErrors.name = "Name is required";
         }
-
         if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
             formErrors.email = "A valid email is required";
         }
-
         if (!message || message.trim() === "") {
             formErrors.message = "Message is required";
         }
-
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
             return;
@@ -92,9 +131,7 @@ export const Contact = () => {
             const result = await response.json();
 
             if (result.success) {
-                console.log("Formulario enviado correctamente", result);
                 setFormSubmitted(true);
-
                 setTimeout(() => {
                     setFormSubmitted(false);
                 }, 3000);
@@ -104,145 +141,114 @@ export const Contact = () => {
         }
     }
 
+    // Animación para mensajes de error
+    useEffect(() => {
+        const errorEls = document.querySelectorAll(`.${styles.error}`);
+        errorEls.forEach((el) => {
+            gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+        });
+    }, [errors]);
+
+    // Animación para mensaje de éxito
+    const successRef = useRef(null);
+    useEffect(() => {
+        if (formSubmitted && successRef.current) {
+            gsap.fromTo(successRef.current, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.5 });
+        }
+    }, [formSubmitted]);
+
     return (
         <>
             <section id="contact" className={styles.contact}>
                 <div className={styles.container}>
                     <Title title={title} />
-                    <motion.h2
+                    <h2
                         className={styles.subtitle}
                         ref={subtitleRef}
-                        initial={{ scale: 0 }}
-                        animate={subtitleInView ? { scale: 1 } : { scale: 0 }}
-                        style={{
-                            opacity: subtitleInView ? 1 : 0,
-                            transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
-                        }}
                     >
                         Get in touch with me for any inquiries or collaborations.
-                    </motion.h2>
+                    </h2>
                     <form className={styles.form} onSubmit={handleSubmit}>
-                        <motion.div
+                        <div
                             ref={nameRef}
                             className={styles.formGroup}
-                            initial={{ scale: 0 }}
-                            animate={nameInView ? { scale: 1 } : { scale: 0 }}
-                            style={{
-                                opacity: nameInView ? 1 : 0,
-                                transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
-                            }}
                         >
                             <label htmlFor="name" className={styles.label}>
                                 Name
                             </label>
-                            <motion.input
+                            <input
                                 className={styles.input}
                                 type="text"
                                 name="name"
-                                whileFocus={{ scale: 1.01 }}
-                                transition={{ duration: 0.2 }}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
                             />
-                        </motion.div>
-                        <motion.div
+                        </div>
+                        <div
                             className={styles.formGroup}
                             ref={emailRef}
-                            initial={{ scale: 0 }}
-                            animate={emailInView ? { scale: 1 } : { scale: 0 }}
-                            style={{
-                                opacity: emailInView ? 1 : 0,
-                                transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
-                            }}
                         >
                             <label htmlFor="email" className={styles.label}>
                                 Email
                             </label>
-                            <motion.input
+                            <input
                                 className={styles.input}
                                 type="email"
                                 name="email"
-                                whileFocus={{ scale: 1.01 }}
-                                transition={{ duration: 0.2 }}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
                             />
-                        </motion.div>
-                        <motion.div
+                        </div>
+                        <div
                             className={styles.formGroup}
                             ref={messageRef}
-                            initial={{ scale: 0 }}
-                            animate={messageInView ? { scale: 1 } : { scale: 0 }}
-                            style={{
-                                opacity: messageInView ? 1 : 0,
-                                transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
-                            }}
                         >
                             <label htmlFor="message" className={styles.label}>
                                 Message
                             </label>
-                            <motion.textarea
+                            <textarea
                                 className={styles.message}
                                 name="message"
                                 id="message"
-                                whileFocus={{ scale: 1.01 }}
-                                transition={{ duration: 0.2 }}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
                             />
-                        </motion.div>
+                        </div>
                         <div className={styles.errorContainer}>
                             {errors.name && (
-                                <motion.p
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ duration: 0.3 }}
-                                    className={styles.error}
-                                >
+                                <p className={styles.error}>
                                     * {errors.name}
-                                </motion.p>
+                                </p>
                             )}
                             {errors.email && (
-                                <motion.p
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ duration: 0.3 }}
-                                    className={styles.error}
-                                >
+                                <p className={styles.error}>
                                     * {errors.email}
-                                </motion.p>
+                                </p>
                             )}
                             {errors.message && (
-                                <motion.p
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ duration: 0.3 }}
-                                    className={styles.error}
-                                >
+                                <p className={styles.error}>
                                     * {errors.message}
-                                </motion.p>
+                                </p>
                             )}
                         </div>
-                        <motion.button
+                        <button
                             type="submit"
                             className={styles.button}
                             ref={buttonRef}
-                            initial={{ scale: 0 }}
-                            animate={buttonInView ? { scale: 1 } : { scale: 0 }}
-                            style={{
-                                opacity: buttonInView ? 1 : 0,
-                                transition: "all 0.15s cubic-bezier(0.17, 0.55, 0.55, 1)",
-                            }}
                         >
                             Submit
-                        </motion.button>
+                        </button>
                     </form>
                 </div>
             </section>
             {formSubmitted && (
-                <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    transition={{ duration: 0.5 }}
+                <div
+                    ref={successRef}
                     className={styles.success}
+                    style={{ opacity: 0, transform: "scale(0)" }}
                 >
-                    <p>Formulario enviado correctamente!</p>
-                </motion.div>
+                    <p>¡Formulario enviado correctamente!</p>
+                </div>
             )}
         </>
     );

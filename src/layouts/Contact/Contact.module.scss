@@ -2,6 +2,7 @@
 
 .contact{
     height: 100vh;
+    min-height: 40rem;
     display: flex;
     align-items: center;
     justify-content:center;
@@ -56,11 +57,12 @@
                 .message{
                     width: 100%;
                     height: auto;
+                    resize: vertical;
                     border: 1px solid variables.$accent-color;
                     border-radius: .5rem;
                     padding-left: .5rem;
-                    max-height: 20rem;
-                    min-height: 5rem;
+                    max-height: 6rem;
+                    min-height: 4rem;
                 }
             }
             .error{
