@@ -1,95 +1,142 @@
 "use client";
-import React, { useEffect} from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./Slider.module.scss";
 import { Card } from "./Card";
 import { Itechnology } from "@/interfaces/technology.interface";
-import { motion, useInView } from "framer-motion";
+import gsap from "gsap";
 
 export const Slider = ({
     items,
     direction = "left",
     speed = "fast",
+    pauseOnHover = true,
 }: {
     items: Itechnology[] | null;
     direction?: "left" | "right";
     speed?: "fast" | "normal" | "slow";
+    pauseOnHover?: boolean;
 }) => {
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    const scrollerRef = React.useRef<HTMLUListElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const scrollerRef = useRef<HTMLUListElement>(null);
 
-    const isInView = useInView(scrollerRef,{
-        once: false,
-        margin: "100000px 0px -100px 0px"
-    });
-    
+    // Hook para detectar si el slider está en vista
+    const [isInView, setIsInView] = React.useState(false);
+
+    useEffect(() => {
+        const observer = new window.IntersectionObserver(
+            ([entry]) => setIsInView(entry.isIntersecting),
+            { root: null, rootMargin: "100000px 0px -100px 0px", threshold: 0 }
+        );
+        if (scrollerRef.current) observer.observe(scrollerRef.current);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         addAnimation();
     }, []);
 
+    useEffect(() => {
+        if (scrollerRef.current && isInView) {
+            const cards = Array.from(scrollerRef.current.children) as HTMLElement[];
+            gsap.fromTo(
+                cards,
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.4,
+                    stagger: 0.05,
+                    ease: "power2.out"
+                }
+            );
+        } else if (scrollerRef.current && !isInView) {
+            const cards = Array.from(scrollerRef.current.children) as HTMLElement[];
+            gsap.to(cards, {
+                opacity: 0,
+                y: 20,
+                duration: 0.25,
+                ease: "power2.in"
+            });
+        }
+    }, [isInView, items]);
+
+    // Pausar animación CSS al hacer hover
+    useEffect(() => {
+        if (!pauseOnHover || !containerRef.current) return;
+        const container = containerRef.current;
+        const handleMouseEnter = () => {
+            container.style.animationPlayState = "paused";
+            // Si usas animación en el ul, también pausar:
+            if (scrollerRef.current) {
+                scrollerRef.current.style.animationPlayState = "paused";
+            }
+        };
+        const handleMouseLeave = () => {
+            container.style.animationPlayState = "running";
+            if (scrollerRef.current) {
+                scrollerRef.current.style.animationPlayState = "running";
+            }
+        };
+        container.addEventListener("mouseenter", handleMouseEnter);
+        container.addEventListener("mouseleave", handleMouseLeave);
+        return () => {
+            container.removeEventListener("mouseenter", handleMouseEnter);
+            container.removeEventListener("mouseleave", handleMouseLeave);
+        };
+    }, [pauseOnHover]);
+
     const addAnimation = () => {
         if (containerRef.current && scrollerRef.current) {
-        const scrollerContent = Array.from(scrollerRef.current.children);
+            const scrollerContent = Array.from(scrollerRef.current.children);
 
-        scrollerContent.forEach((item) => {
-            const duplicatedItem = item.cloneNode(true);
-            scrollerRef.current?.appendChild(duplicatedItem);
-        });
+            scrollerContent.forEach((item) => {
+                const duplicatedItem = item.cloneNode(true);
+                scrollerRef.current?.appendChild(duplicatedItem);
+            });
 
-        getDirection();
-        getSpeed();
+            getDirection();
+            getSpeed();
         }
     };
 
     const getDirection = () => {
         if (containerRef.current) {
-        containerRef.current.style.setProperty(
-            "--animation-direction",
-            direction === "left" ? "forwards" : "reverse"
-        );
+            containerRef.current.style.setProperty(
+                "--animation-direction",
+                direction === "left" ? "forwards" : "reverse"
+            );
         }
     };
 
     const getSpeed = () => {
         if (containerRef.current) {
-        const speedMapping = {
-            fast: "15s",
-            normal: "25s",
-            slow: "35s",
-        };
-        containerRef.current.style.setProperty(
-            "--animation-duration",
-            speedMapping[speed] || "30s"
-        );
+            const speedMapping = {
+                fast: "15s",
+                normal: "25s",
+                slow: "35s",
+            };
+            containerRef.current.style.setProperty(
+                "--animation-duration",
+                speedMapping[speed] || "30s"
+            );
         }
     };
 
     return (
-        <motion.div
-        ref={containerRef}
-        className={styles.scroller}
+        <div
+            ref={containerRef}
+            className={styles.scroller}
         >
-            <motion.ul
+            <ul
                 ref={scrollerRef}
                 className={`${styles.scrollerList} ${styles.animateScroll}`}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                variants={{
-                    visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
-                    hidden: { opacity: 0 }
-                }}
-                
-                
             >
                 {items && [...items, ...items].map((item, idx) => (
-                <motion.li className={styles.card} key={idx}
-                variants={{ visible: { y: 0, opacity: 1 }, hidden: { y: 20, opacity: 0 } }}
-                
-                >
-                    <Card {...item} />
-                </motion.li>
+                    <li className={styles.card} key={idx}>
+                        <Card {...item} />
+                    </li>
                 ))}
-            </motion.ul>
-        </motion.div>
+            </ul>
+        </div>
     );
 };
