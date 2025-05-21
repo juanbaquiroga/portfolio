@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState, useRef } from "react";
+import gsap from "gsap";
 import styles from "./Sidebar.module.scss";
 import { Julius_Sans_One } from "next/font/google";
 
@@ -10,7 +10,7 @@ const menuItems = [
     { id: 1, label: "ABOUT ME", href: "#about-me"},
     { id: 2, label: "PROJECTS", href: "#projects" },
     { id: 3, label: "TECHNOLOGIES", href: "#technologies" },
-    { id: 4, label: "CONTACT", href: "#contact"  },
+    { id: 4, label: "CONTACT", href: "#contact"},
 ];
 
 const Sidebar = () => {
@@ -18,10 +18,19 @@ const Sidebar = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [show, setShow] = useState(false);
 
+    // Refs para animaciones GSAP
+    const activeZoneRef = useRef<HTMLDivElement>(null);
+    const sidebarRef = useRef<HTMLDivElement>(null);
+    const menuItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+    const expandRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const topRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const bottomRefs = useRef<(HTMLDivElement | null)[]>([]);
+
     useEffect(() => {
         const timer = setTimeout(() => setShow(true), 2000);
         return () => clearTimeout(timer);
     }, []);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -41,56 +50,119 @@ const Sidebar = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Llamar inicialmente para establecer la sección activa
+        handleScroll();
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Animación de la zona activa y sidebar
+    useEffect(() => {
+        if (!show) return;
+
+        if (activeZoneRef.current) {
+            gsap.killTweensOf(activeZoneRef.current);
+            if (isVisible) {
+                gsap.to(activeZoneRef.current, {
+                    x: "0%",
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power2.out",
+                    background: "radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.26) 0%, transparent 70%)"
+                });
+            } else {
+                gsap.to(activeZoneRef.current, {
+                    x: "0%",
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "power2.out",
+                    background: "radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.35) 0%, transparent 50%)",
+                    repeat: -1,
+                    yoyo: true,
+                    repeatDelay: 1
+                });
+            }
+        }
+
+        if (sidebarRef.current) {
+            gsap.killTweensOf(sidebarRef.current);
+            gsap.to(sidebarRef.current, {
+                x: isVisible ? "0%" : "-150%",
+                duration: 0.5,
+                ease: "power2.out"
+            });
+        }
+    }, [isVisible, show]);
+
+    // Animación de los items del menú y expand/top/bottom
+    useEffect(() => {
+        menuItems.forEach((item, index) => {
+            const isActive = (active === item.id && isVisible);
+            const menuItem = menuItemRefs.current[index];
+            const expand = expandRefs.current[index];
+            const top = topRefs.current[index];
+            const bottom = bottomRefs.current[index];
+
+            // Animación del item
+            if (menuItem) {
+                gsap.killTweensOf(menuItem);
+                gsap.to(menuItem, {
+                    fontSize: isActive ? "20px" : "10px",
+                    width: isActive ? "150%" : "100%",
+                    height: isActive ? "75px" : "30px",
+                    duration: 0.5,
+                    ease: "elastic.out(1.1, 0.8)"
+                });
+            }
+
+            // Animación del expand
+            if (expand) {
+                gsap.killTweensOf(expand);
+                gsap.to(expand, {
+                    width: isActive ? "75px" : "0px",
+                    height: isActive ? "80px" : "10px",
+                    duration: 0.5,
+                    ease: "elastic.out(1.1, 0.8)"
+                });
+            }
+
+            // Animación top
+            if (top) {
+                gsap.killTweensOf(top);
+                gsap.to(top, {
+                    scaleY: isActive ? 1 : 0,
+                    duration: isActive ? 0.2 : 0.1,
+                    delay: isActive ? 0.1 : 0,
+                    transformOrigin: "top",
+                    ease: "elastic.out(1.1, 0.8)"
+                });
+            }
+
+            // Animación bottom
+            if (bottom) {
+                gsap.killTweensOf(bottom);
+                gsap.to(bottom, {
+                    scaleY: isActive ? 1 : 0,
+                    duration: isActive ? 0.2 : 0.1,
+                    delay: isActive ? 0.1 : 0,
+                    transformOrigin: "bottom",
+                    ease: "elastic.out(1.1, 0.8)"
+                });
+            }
+        });
+    }, [active, isVisible]);
+
     return (
         <>
-            <motion.div
+            <div
+                ref={activeZoneRef}
                 className={styles.activeZone}
                 onMouseEnter={() => setIsVisible(true)}
-                initial={{
-                    y: "-50%",
-                    x: "-100%",
-                }}
-                animate={
-                    show
-                       ? isVisible?{
-                           x: "0%",
-                           y: "-50%",
-                           opacity: 0,
-                       }:{
-                           y: "-50%",
-                           x: "0%",
-                           background: ["radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.26) 0%, transparent 70%)", " radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.35) 0%, transparent 50%)", "radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.26) 0%, transparent 70%)"],
-                       }:
-                       {
-                           y: "-50%",
-                           x: "-100%",
-                       }
-                }
-                transition={
-                    isVisible 
-                        ? { type: "just" }
-                        : {
-                            background: {
-                                repeat: Infinity,
-                                duration: 2,
-                                ease: "easeInOut"
-                            }
-                        }
-                }
-            ></motion.div>
-            <motion.div
+            ></div>
+            <div
+                ref={sidebarRef}
                 className={styles.sidebar}
                 onMouseLeave={() => setIsVisible(false)}
-                animate={{
-                    y: "-50%",
-                    x: isVisible ? 0 : "-150%",
-                }}
-                style={show?{display:"flex"}:{display:"none"}}
+                style={show ? {display:"flex"} : {display:"none"}}
             >
                 {/* Logo */}
                 <div className={styles.logoContainer}>
@@ -108,101 +180,40 @@ const Sidebar = () => {
 
                 {/* Navigation Menu */}
                 <div className={styles.menu}>
-                    {menuItems.map((item) => {
-                        const isActive = (active === item.id && isVisible == true);
+                    {menuItems.map((item, index) => {
                         return (
-                            <motion.a
+                            <a
                                 key={item.id}
+                                ref={(el: HTMLAnchorElement | null): void => {
+                                    menuItemRefs.current[index] = el;
+                                }}
                                 href={item.href}
                                 className={styles.menuItem}
                                 onMouseEnter={() => setActive(item.id)}
-                                animate={
-                                    isActive
-                                        ? {
-                                              fontSize: "20px",
-                                              width: "150%",
-                                              height: "75px",
-                                          }
-                                        : {
-                                              fontSize: "10px",
-                                              width: "100%",
-                                              height: "30px",
-                                          }
-                                }
-                                transition={{
-                                    type: "spring",
-                                    stiffness: 200,
-                                    damping: 15,
-                                }}
                             >
-                                <motion.p
-                                    className={`${jls.className} ${styles.letter}`}
-                                >
+                                <p className={`${jls.className} ${styles.letter}`}>
                                     {item.label}
-                                </motion.p>
-                                <motion.div
+                                </p>
+                                <div
+                                    ref={(el: HTMLDivElement | null): void => {
+                                        expandRefs.current[index] = el;
+                                    }}
                                     className={styles.expand}
-                                    initial={{ width: 0, height: "10px" }}
-                                    animate={
-                                        isActive
-                                            ? { width: "75px", height: "80px" }
-                                            : { width: 0, height: 0 }
-                                    }
-                                    transition={
-                                        isActive
-                                            ? {
-                                                  type: "spring",
-                                                  stiffness: 200,
-                                                  damping: 13,
-                                              }
-                                            : {
-                                                  type: "tween",
-                                              }
-                                    }
                                 >
-                                    <motion.div
+                                    <div
+                                        ref={(el: HTMLDivElement | null): void => {
+                                            topRefs.current[index] = el;
+                                        }}
                                         className={styles.top}
-                                        initial={{ scaleY: 0 }}
-                                        animate={{
-                                            scaleY: active === item.id ? 1 : 0,
-                                        }}
-                                        transition={
-                                            isActive
-                                                ? {
-                                                      type: "spring",
-                                                      stiffness: 300,
-                                                      damping: 15,
-                                                      duration: 0.2,
-                                                      delay: 0.15,
-                                                  }
-                                                : {
-                                                      type: "keyframes",
-                                                      duration: 0.1,
-                                                      delay: 0,
-                                                  }
-                                        }
                                     />
-                                    <motion.div
+                                    <div
+                                        ref={(el: HTMLDivElement | null): void => {
+                                            bottomRefs.current[index] = el;
+                                        }}
                                         className={styles.bottom}
-                                        initial={{ scaleY: 0 }}
-                                        animate={{
-                                            scaleY: active === item.id ? 1 : 0,
-                                        }}
-                                        transition={{
-                                            type:
-                                                active === item.id
-                                                    ? "spring"
-                                                    : "keyframes",
-                                            stiffness: 300,
-                                            damping: 15,
-                                            duration:
-                                                active === item.id ? 0.2 : 0.1,
-                                            delay:
-                                                active === item.id ? 0.15 : 0,
-                                        }}
                                     />
-                                </motion.div>
-                            </motion.a>
+                                </div>
+                            </a>
                         );
                     })}
                 </div>
@@ -213,7 +224,7 @@ const Sidebar = () => {
                     <span>/</span>
                     <span>ES</span>
                 </div>
-            </motion.div>
+            </div>
         </>
     );
 };
