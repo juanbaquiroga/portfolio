@@ -59,26 +59,42 @@ const Sidebar = () => {
     useEffect(() => {
         if (!show) return;
 
+        let gradTween: gsap.core.Tween | null = null;
+        let gradObj = { percent: 50 };
+
         if (activeZoneRef.current) {
             gsap.killTweensOf(activeZoneRef.current);
+
             if (isVisible) {
+                if (gradTween) gradTween.kill();
                 gsap.to(activeZoneRef.current, {
                     x: "0%",
                     opacity: 0,
-                    duration: 0.5,
+                    duration: 0.35,
                     ease: "power2.out",
                     background: "radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.26) 0%, transparent 70%)"
                 });
             } else {
+                // Animación infinita del gradiente
+                if (gradTween) gradTween.kill();
+                gradObj.percent = 50;
+                gradTween = gsap.to(gradObj, {
+                    percent: 80,
+                    duration: 1.2,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                    onUpdate: () => {
+                        if (activeZoneRef.current) {
+                            activeZoneRef.current.style.background = `radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.35) 0%, transparent ${gradObj.percent}%)`;
+                        }
+                    }
+                });
                 gsap.to(activeZoneRef.current, {
                     x: "0%",
                     opacity: 1,
                     duration: 0.5,
-                    ease: "power2.out",
-                    background: "radial-gradient(ellipse at left center, rgba(0, 0, 0, 0.35) 0%, transparent 50%)",
-                    repeat: -1,
-                    yoyo: true,
-                    repeatDelay: 1
+                    ease: "power2.out"
                 });
             }
         }
@@ -91,6 +107,11 @@ const Sidebar = () => {
                 ease: "power2.out"
             });
         }
+
+        // Limpieza del tween al desmontar o cambiar visibilidad
+        return () => {
+            if (gradTween) gradTween.kill();
+        };
     }, [isVisible, show]);
 
     // Animación de los items del menú y expand/top/bottom
