@@ -4,8 +4,6 @@
     height: 115vh;
     width: 100%;
     padding-bottom:15vh;
-    //background-color: variables.$bg-color;
-    //background-image: linear-gradient(180deg, variables.$bg-color 0vh, variables.$bg-color 100vh, transparent 115vh);
     display: grid;
     place-items: center;
 
@@ -32,7 +30,6 @@
                 stroke-dasharray: 2000;
                 stroke-linecap: round;
                 stroke-linejoin: round;
-                // animation: animate 5s linear;
             }
               
             .animate {

@@ -3,12 +3,6 @@ import { motion, useInView } from "framer-motion";
 import styles from "./Icon.module.scss";
 import { useRef } from "react";
 
-type IconProps = {
-    icon: 'instagram' | 'linkedin' | 'github' | 'whatsapp';
-    link: string;
-    inView: boolean
-};
-
 const icons = {
     instagram: (
         <svg className={styles.svg} viewBox="0 0 448 512">

@@ -3,7 +3,6 @@ import styles from "./About_me.module.scss";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import photo from "@/assets/about-me.png";
 import { Ititle } from "@/interfaces/title.interface";
 import { Title } from "@/components/Title";
 
