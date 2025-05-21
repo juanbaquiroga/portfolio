@@ -66,7 +66,6 @@ const Sidebar = () => {
             gsap.killTweensOf(activeZoneRef.current);
 
             if (isVisible) {
-                if (gradTween) gradTween.kill();
                 gsap.to(activeZoneRef.current, {
                     x: "0%",
                     opacity: 0,
@@ -76,7 +75,6 @@ const Sidebar = () => {
                 });
             } else {
                 // Animación infinita del gradiente
-                if (gradTween) gradTween.kill();
                 gradObj.percent = 50;
                 gradTween = gsap.to(gradObj, {
                     percent: 80,
