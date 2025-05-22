@@ -147,9 +147,9 @@ export const Footer = () => {
                     </div>
                     <div className={styles.container2}>
                         <div className={styles.links}>
-                            <Icon icon="instagram" delay={0} inView={true} link="https://instagram.com/juanbaquiroga"></Icon>
-                            <Icon icon="linkedin" delay={0.05} inView={true} link="https://linkedin.com/in/juanbaquiroga"></Icon>
-                            <Icon icon="github" delay={0.1} inView={true} link="https://github.com/juanbaquiroga"></Icon>
+                            <Icon icon="instagram" delay={0.05} inView={true} link="https://instagram.com/juanbaquiroga"></Icon>
+                            <Icon icon="linkedin" delay={0.1} inView={true} link="https://linkedin.com/in/juanbaquiroga"></Icon>
+                            <Icon icon="github" delay={0.15} inView={true} link="https://github.com/juanbaquiroga"></Icon>
                         </div>
                         <p ref={contactRef} className={styles.contact} style={{ opacity: 0, transform: "translateY(20px)" }}>
                             Contact: <a ref={mailRef} href="mailto:juanbaquiroga@gmail.com" className={styles.mail} style={{ opacity: 0 }}>juanbaquiroga@gmail.com</a>

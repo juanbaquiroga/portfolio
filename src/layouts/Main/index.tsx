@@ -93,9 +93,9 @@ export const Main = () => {
                     </div>
                 </div>
                 <div className={styles.links}>
-                    <Icon icon="instagram" delay={0.25} link="https://instagram.com/juanbaquiroga"></Icon>
-                    <Icon icon="linkedin" delay={0.30} link="https://linkedin.com/in/juanbaquiroga"></Icon>
-                    <Icon icon="github" delay={0.35} link="https://github.com/juanbaquiroga"></Icon>
+                    <Icon icon="instagram" delay={0.7} link="https://instagram.com/juanbaquiroga"></Icon>
+                    <Icon icon="linkedin" delay={0.75} link="https://linkedin.com/in/juanbaquiroga"></Icon>
+                    <Icon icon="github" delay={0.8} link="https://github.com/juanbaquiroga"></Icon>
                 </div>
             </main>
         </>
