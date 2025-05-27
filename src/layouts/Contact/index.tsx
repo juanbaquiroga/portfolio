@@ -240,16 +240,15 @@ export const Contact = () => {
                         </button>
                     </form>
                 </div>
+                {formSubmitted && (
+                    <div
+                        ref={successRef}
+                        className={styles.success}
+                    >
+                        <p>¡Formulario enviado correctamente!</p>
+                    </div>
+                )}
             </section>
-            {formSubmitted && (
-                <div
-                    ref={successRef}
-                    className={styles.success}
-                    style={{ opacity: 0, transform: "scale(0)" }}
-                >
-                    <p>¡Formulario enviado correctamente!</p>
-                </div>
-            )}
         </>
     );
 };
