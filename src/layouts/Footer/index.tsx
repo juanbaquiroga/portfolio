@@ -145,6 +145,9 @@ export const Footer = () => {
                             © Juanbaquiroga 2024. All rights reserved
                         </p>
                     </div>
+                    <div 
+                        className={styles.lineMobile}
+                    ></div>
                     <div className={styles.container2}>
                         <div className={styles.links}>
                             <Icon icon="instagram" delay={0.05} inView={true} link="https://instagram.com/juanbaquiroga"></Icon>

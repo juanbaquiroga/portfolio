@@ -82,6 +82,9 @@
             flex-direction: column;
             align-items: center;
             gap: 1rem;
+            .lineMobile{
+                display: none;
+            }
             .links{
                 display: flex;
                 gap: 0.6rem;
@@ -90,6 +93,54 @@
                 color: variables.$accent-color;
                 .mail{
                     font-weight: 500;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 768px){
+    .footer{
+        height: fit-content;
+        flex-direction: column;
+        padding: 3rem 0;
+        .box1{
+            width: 65%;
+            align-items: center;
+           .logoContainer{
+               width: 100%;
+               height: auto;
+           }
+        }
+        .box2{
+            height: 100%;
+            width: 75%;
+            flex-direction: column-reverse;
+            gap: 2rem;
+            .lineMobile{
+                display: block;
+                width: 100%;
+                height: 2px;
+                background-color: variables.$accent-color;
+            }
+            .container1{
+                width: 100%;
+                align-items: center;
+                gap: 1.5rem;
+                .links{
+                    flex-flow: row wrap;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 0.6rem;
+                }
+                .rights{
+                    text-align: center;
+                }
+            }
+            .container2{
+                width: 100%;
+                gap: 1.5rem;
+                .contact{
+                    text-align: center;
                 }
             }
         }
