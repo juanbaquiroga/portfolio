@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import styles from "./Footer.module.scss"
 import { Icon } from "@/components/Icon"
 import gsap from "gsap"
+import { useGsapInView } from "@/hooks/useGsapInView";
 
 export const Footer = () => {
     const ref = useRef<HTMLDivElement | null>(null)
@@ -12,6 +13,69 @@ export const Footer = () => {
     const rightsRef = useRef<HTMLParagraphElement | null>(null)
     const contactRef = useRef<HTMLParagraphElement | null>(null)
     const mailRef = useRef<HTMLAnchorElement | null>(null)
+
+    const svgInView = useGsapInView(svgRef as React.RefObject<HTMLElement>)
+    const lineInView = useGsapInView(lineRef)
+    const linksInView = useGsapInView(linksRef)
+    const rightsInView = useGsapInView(rightsRef)
+    const contactInView = useGsapInView(contactRef)
+    const mailInView = useGsapInView(mailRef)
+
+    useEffect(() => {
+        if (svgRef.current) {
+            if (svgInView) {
+                gsap.fromTo(svgRef.current, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" })
+            } else {
+                gsap.set(svgRef.current, { scale: 0, opacity: 0 })
+            }
+        }
+    }, [svgInView])
+    useEffect(() => {
+        if (lineRef.current) {
+            if (lineInView) {
+                gsap.fromTo(lineRef.current, { scaleY: 0, scaleX: 1, opacity: 0 }, { scaleY: 1, opacity: 1, scaleX: 1, duration: 0.5, ease: "power2.out", transformOrigin: "center center" })
+            } else {
+                gsap.set(lineRef.current, { scaleX: 0, scaleY:0, opacity: 0, transformOrigin: "center" })
+            }
+        }
+    }, [lineInView])
+    useEffect(() => {
+        if (linksRef.current) {
+            if (linksInView) {
+                gsap.to(linksRef.current.children, { y: 0, opacity: 1, stagger: 0.1, duration: 0.3, ease: "power2.out" })
+            } else {
+                gsap.set(linksRef.current.children, { y: 20, opacity: 0 })
+            }
+        }
+    }, [linksInView])
+    useEffect(() => {
+        if (rightsRef.current) {
+            if (rightsInView) {
+                gsap.to(rightsRef.current, { opacity: 1, y: 0, duration: 0.25, delay: 0.25, ease: "power2.out" })
+            } else {
+                gsap.set(rightsRef.current, { opacity: 0, y: 20 })
+            }
+        }
+    }, [rightsInView])
+    useEffect(() => {
+        if (contactRef.current) {
+            if (contactInView) {
+                gsap.to(contactRef.current, { opacity: 1, y: 0, duration: 0.25, delay: 0.25, ease: "power2.out" })
+            } else {
+                gsap.set(contactRef.current, { opacity: 0, y: 20 })
+            }
+        }
+    }, [contactInView])
+    useEffect(() => {
+        if (mailRef.current) {
+            if (mailInView) {
+                gsap.to(mailRef.current, { opacity: 1, duration: 0.1, delay: 0.25, ease: "power2.out" })
+            } else {
+                gsap.set(mailRef.current, { opacity: 0 })
+            }
+        }
+    }, [mailInView])
+
     const [isInView, setIsInView] = useState(false)
 
     useEffect(() => {

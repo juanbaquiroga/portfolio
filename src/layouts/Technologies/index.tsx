@@ -7,6 +7,7 @@ import { Title } from "@/components/Title";
 import { Slider } from "@/components/Slider";
 import { Ititle } from "@/interfaces/title.interface";
 import { Itechnology } from "@/interfaces/technology.interface";
+import { useGsapInView } from "@/hooks/useGsapInView";
 import gsap from "gsap";
 
 const title:Ititle = {
@@ -15,19 +16,6 @@ const title:Ititle = {
   strokeDash: 3500,
   color:"accent",
   strokeWidth: 12
-}
-
-function useGsapInView(ref: React.RefObject<HTMLElement>, options: { margin?: string } = {}) {
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { root: null, rootMargin: options.margin || "0px", threshold: 0 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [ref, options.margin]);
-  return inView;
 }
 
 export const Technologies = ({ isMobile }: { isMobile: boolean }) => {

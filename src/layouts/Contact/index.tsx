@@ -4,6 +4,7 @@ import { FormEvent, useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { Ititle } from "@/interfaces/title.interface";
 import { Title } from "@/components/Title";
+import { useGsapInView } from "@/hooks/useGsapInView";
 
 const title: Ititle = {
     d: "M30.9999 9.99979C-16.5 -0.500007 3.99996 53.9999 80.9999 48.9998C97 47.9608 128.7 45.9 139.5 39.5C148 34.463 175.5 6.49985 118.5 6.49999C99.6667 5.83332 53.9004 15.8 21.5004 61C-18.9996 117.5 42.5 139 88 120C124.4 104.8 145.167 82 151 72.5C156.833 63 156.5 58 144.5 86C139.143 98.5 137.7 117.3 166.5 98.5C183 87.7292 198 39.5 161 56C148.5 61.5743 139.5 78.5 154 94C159.145 99.5 173.3 104.8 192.5 86C196.074 82.5 205 75 212.5 60C220 45 219.5 35 203 80C201.35 84.5 199.5 88 194 97C185.75 110.5 176 116 214 75.5C229 59.5132 259.5 39.5 234 76C221.5 93.8922 219 122 253.5 86C262.125 77 275 54 280 46C288.167 24 313 0 277 49.5C273.727 54 249 49.5 270.5 51.5C288.5 52.5 317 50 281 51.5C250.5 73 232 135 287 91C290.049 88.5605 329 27.8 341 53C343.083 57.3733 346 62.5 341.5 52C338.714 45.5 325.7 39.9 302.5 71.5C284.88 95.5 283 130 333 76C363.093 43.5 297 126 346 91C348.1 89.5 351.4 87.7 357 80.5C367.5 63.5 389.5 42 391.5 66.5C392.04 73.112 383 81 391.5 67C392.411 65.5 389 33.5 356 82.5C349.5 92.1515 353.5 130 403.5 82.5C409.5 73.8333 423.759 54.9117 427 46C433 29.5 464.5 -2 423.5 49.5C420.714 53 400 51.5 415.5 51.5C433 51.6667 461.9 51.9 437.5 51.5C406 48.5 370.5 148.5 440.5 83.5C440.833 83.1909 441.5 82 441.5 81.5",
@@ -12,19 +13,6 @@ const title: Ititle = {
     color: "accent",
     strokeWidth: 9,
 };
-
-function useGsapInView(ref: React.RefObject<HTMLElement>, options: { margin?: string } = {}) {
-    const [inView, setInView] = useState(false);
-    useEffect(() => {
-        const observer = new window.IntersectionObserver(
-            ([entry]) => setInView(entry.isIntersecting),
-            { root: null, rootMargin: options.margin || "0px", threshold: 0 }
-        );
-        if (ref.current) observer.observe(ref.current);
-        return () => observer.disconnect();
-    }, [ref, options.margin]);
-    return inView;
-}
 
 export const Contact = () => {
     const subtitleRef = useRef(null);
