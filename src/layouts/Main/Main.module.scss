@@ -1,13 +1,11 @@
 @use "@/styles/variables.scss";
 
 .main{
-    position: relative;
     height: 115vh;
     width: 100%;
     padding-bottom:15vh;
     display: grid;
     place-items: center;
-    overflow: hidden;
     
     .backgroundSvg1{
         position: absolute;
