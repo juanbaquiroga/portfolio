@@ -154,3 +154,44 @@
     }
     
 }
+@media (max-width: 768px){
+    .projects{
+        margin-top: 5rem;
+        .container{
+            width: 90%;
+        
+            .projectsContainer{
+                width: 100%;
+                gap: 5vw;
+                
+                :nth-child(3n + 1){
+                    aspect-ratio: 2/0.8;
+                    width: 100%;
+                }
+                
+                :not(:nth-child(3n + 1)){
+                    aspect-ratio: 1/0.8;
+                    width: calc(50% - 2.5vw);
+                }
+
+                .item{
+                    height: auto;
+                    padding: 0.25rem;
+                    border-radius: .75rem;
+                }
+        
+            }
+            .detailContainer{
+                .detail{
+                    width: 90%;
+                }
+            }
+        }
+        
+    }
+}
+@media (max-width: 480px){
+   .projects{
+       margin-top: 0;
+   }
+}

@@ -20,7 +20,7 @@ const title:Ititle = {
 
 const ProjectCard =({ item, setSelectedId }: { item: Iproject; setSelectedId: (id: string) => void })=>{
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: false , margin: "100000px 0px -100px 0px"});
+  const isInView = useInView(ref, { once: false , margin: "10000100px 0px -100px 0px"});
   return(
     <>
       <motion.div
