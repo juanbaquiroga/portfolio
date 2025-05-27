@@ -30,11 +30,14 @@ function useGsapInView(ref: React.RefObject<HTMLElement>, options: { margin?: st
   return inView;
 }
 
-export const Technologies = () => {
-
+export const Technologies = ({ isMobile }: { isMobile: boolean }) => {
   const subtitleRef = useRef(null)
   const [items, setItems] = useState<Itechnology[] | null>(null)
   const subtitleInView = useGsapInView(subtitleRef, { margin: "100000px 0px -100px 0px" })
+
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +58,6 @@ export const Technologies = () => {
     fetchData();
   }, []);
 
-  // Animación GSAP para el subtítulo
   useEffect(() => {
     if (subtitleRef.current) {
       if (subtitleInView) {
@@ -70,6 +72,14 @@ export const Technologies = () => {
     }
   }, [subtitleInView]);
 
+  let firstHalf: Itechnology[] = [];
+  let secondHalf: Itechnology[] = [];
+  if (items) {
+    const mid = Math.ceil(items.length / 2);
+    firstHalf = items.slice(0, mid);
+    secondHalf = items.slice(mid);
+  }
+
   return(
     <>
       <section id="technologies" className={styles.technologies}>
@@ -83,7 +93,14 @@ export const Technologies = () => {
               Tools, frameworks, and languages I use
             </h2>
           </div>
-          <Slider items={items} direction="left" speed="normal" />
+          {isMobile && items ? (
+            <>
+              <Slider items={firstHalf} direction="left" speed="normal" />
+              <Slider items={secondHalf} direction="right" speed="normal" />
+            </>
+          ) : (
+            <Slider items={items} direction="left" speed="normal" />
+          )}
         </div>
       </section>
     </>
