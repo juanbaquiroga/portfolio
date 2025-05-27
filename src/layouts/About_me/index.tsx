@@ -118,23 +118,21 @@ export const About_me = () => {
                                 height={9000}
                             ></Image>
                         </div>
-                        <div className={styles.textContainer}>
-                            <p
-                                ref={refText1}
-                                className={styles.text}
-                                style={{ opacity: 0, transform: 'scale(0)' }} 
-                            >
-                                Throughout my career, I have contributed to the development and maintenance of several web platforms, ensuring optimal performance and user experience. I have a solid foundation in both front-end and back-end development. Let's connect and build something amazing together!
-                            </p>
+                        <p
+                            ref={refText1}
+                            className={styles.text1}
+                            style={{ opacity: 0, transform: 'scale(0)' }} 
+                        >
+                            Throughout my career, I have contributed to the development and maintenance of several web platforms, ensuring optimal performance and user experience. I have a solid foundation in both front-end and back-end development. Let's connect and build something amazing together!
+                        </p>
 
-                            <p
-                                ref={refText2}
-                                className={styles.text}
-                                style={{ opacity: 0, transform: 'scale(0)' }} 
-                            >
-                                I'm a junior full-stack developer with a passion for building web solutions. Proficient in HTML, CSS, JavaScript, React.js, and Next.js, I thrive in both front-end and back-end development. I love to learn and collaborate on innovative projects.
-                            </p>
-                        </div>
+                        <p
+                            ref={refText2}
+                            className={styles.text2}
+                            style={{ opacity: 0, transform: 'scale(0)' }} 
+                        >
+                            I'm a junior full-stack developer with a passion for building web solutions. Proficient in HTML, CSS, JavaScript, React.js, and Next.js, I thrive in both front-end and back-end development. I love to learn and collaborate on innovative projects.
+                        </p>
                     </div>
                     <a
                         href="https://drive.google.com/uc?export=download&id=11h7PnlvkQVuhTTJpvTA4wkilR5dVrWzp"
