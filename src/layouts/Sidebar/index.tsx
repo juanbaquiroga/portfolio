@@ -31,29 +31,29 @@ const Sidebar = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    // Detectar la sección activa en base al scroll del usuario
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         const sections = menuItems.map(item => document.querySelector(item.href));
+    //         const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const sections = menuItems.map(item => document.querySelector(item.href));
-            const scrollPosition = window.scrollY + window.innerHeight / 2;
+    //         sections.forEach((section, index) => {
+    //             if (section) {
+    //                 const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+    //                 const sectionBottom = sectionTop + (section as HTMLElement).offsetHeight;
 
-            sections.forEach((section, index) => {
-                if (section) {
-                    const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-                    const sectionBottom = sectionTop + (section as HTMLElement).offsetHeight;
+    //                 if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+    //                     setActive(index);
+    //                 }
+    //             }
+    //         });
+    //     };
 
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        setActive(index);
-                    }
-                }
-            });
-        };
+    //     window.addEventListener('scroll', handleScroll);
+    //     handleScroll();
 
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    // }, []);
 
     // Animación de la zona activa y sidebar
     useEffect(() => {
@@ -172,11 +172,11 @@ const Sidebar = () => {
 
     return (
         <>
-            <div
+            {!isVisible && <div
                 ref={activeZoneRef}
                 className={styles.activeZone}
                 onMouseEnter={() => setIsVisible(true)}
-            ></div>
+            ></div>}
             <div
                 ref={sidebarRef}
                 className={styles.sidebar}
