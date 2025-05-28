@@ -13,18 +13,3 @@
     right: 0;
     z-index: -3;
 }
-.particles_container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-    pointer-events: none; // Evita que las partículas interfieran con otros elementos
-    z-index: -3; // Para que estén detrás del contenido
-  }
-  
-  .particle {
-    position: absolute;
-    background-color: variables.$bullets-color; // Color de la partícula
-    border-radius: 50%;
-  }

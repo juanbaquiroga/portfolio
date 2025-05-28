@@ -8,60 +8,60 @@
 
   .container {
     padding: 2em 0;
-    position: relative;
-    height: 80%;
+    height: fit-content;
+    max-height: 90%;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
     background-color: variables.$accent-color;
+    gap: 2rem;
 
     .interiorContainer {
       width: 80%;
-      max-width: 1400px;
+      height: fit-content;
       height: 75%;
-      padding: .5em;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
+      max-width: 1250px;
+      display: grid;
+      grid-template-areas: "photo text1"
+                           "photo text2";
       align-items: center;
       gap: 2.5%;
 
-      .textContainer {
-        width: 52.5%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1em;
-
-        .text {
-          width: 100%;
-          color: variables.$color-2;
-          font-size: clamp(0.3rem, 0.3rem + 1.5vh, 1.4rem);
-          line-height: 1.35;
-          font-weight: 300;
-        }
+      .text1, .text2{
+        color: variables.$color-2;
+        font-size: clamp(0.5rem, 0.4rem + 1.5vh, 1.4rem);
+        line-height: 1.35;
+        font-weight: 300;
+      }
+      .text1{
+        grid-area: text1;
+        align-self: flex-end;
+      }
+      .text2{
+        grid-area: text2;
+        align-self: flex-start;
       }
       .photoContainer{
-        height: 100%;
+        height: 75%;
         display: flex;
         justify-content: center;
         align-items: center;
+        grid-area: photo;
         .photo {
-          height: 80%;
+          aspect-ratio: 10/16;
+          height: 100%;
           width: auto;
           max-height: 600px;
           border-radius: 5px;
+          object-fit: cover;
         }
       }
 
     }
 
     .button {
-      color: red;
       display: flex;
       height: 2.5rem;
       background-color: variables.$color-2;
@@ -74,12 +74,51 @@
         height: 1rem;
         width: 1rem;
         margin-right: .5rem;
-        path {
+        .path {
           height: 100%;
           width: 100%;
-          color: green;
+          fill: variables.$text-color;
         }
       }
     }
+  }
+}
+@media (max-width: 768px){
+  .about_me {
+    .container {
+      height: fit-content;
+      gap: 3rem;
+      .interiorContainer {
+        padding: 0;
+        width: 90%;
+        height: fit-content;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: min-content min-content;
+        grid-template-areas: "text1 text1"
+                           "photo text2";
+        .text1,.text2{
+          font-size: clamp(0.5rem, 0.3rem + 2.5vw, 1.3rem);
+        }
+        .text1{
+          align-self: flex-end;
+        }
+        .text2{
+          align-self: flex-start;
+        }
+        .photoContainer{
+          width: 100%;
+          max-height: 100%;
+          align-self: flex-start;
+          align-items: flex-start;
+          .photo{
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            max-width: 100%;
+          }
+        }
+      }
+    }
+
   }
 }

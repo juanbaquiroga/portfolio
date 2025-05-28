@@ -2,9 +2,11 @@
 
 .contact{
     height: 100vh;
+    min-height: 40rem;
     display: flex;
     align-items: center;
     justify-content:center;
+    position: relative;
     
     .container{
         padding: 2em 0;
@@ -56,11 +58,12 @@
                 .message{
                     width: 100%;
                     height: auto;
+                    resize: vertical;
                     border: 1px solid variables.$accent-color;
                     border-radius: .5rem;
                     padding-left: .5rem;
-                    max-height: 20rem;
-                    min-height: 5rem;
+                    max-height: 6rem;
+                    min-height: 4rem;
                 }
             }
             .error{
@@ -76,15 +79,27 @@
         }
     }
 
+    .success{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border-radius: 10px;
+        z-index: 1000;
+    }
 }
-.success{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    border-radius: 10px;
-    z-index: 1000;
+
+@media (max-width: 768px){
+    .contact{
+        .container{
+            width: 90%;
+            min-width: 300px;
+           .form{
+               width: 80%;
+           }
+       }
+    }
 }

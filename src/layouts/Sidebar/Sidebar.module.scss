@@ -5,9 +5,9 @@
   z-index: 2;
   top: 50%;
   left: 15px;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(-150%);
   width: 120px;
-  gap: 2rem;
+  gap: 45px;
   background-color: #fffefc;
   border-radius: 60px;
   display: flex;
@@ -19,7 +19,6 @@
 
   .logoContainer {
     width: 35%;
-    margin-bottom: 1rem;
 
     .svg {
       height: auto;
@@ -48,7 +47,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     padding: 0;
     gap: .5rem;
 
@@ -66,7 +65,7 @@
       .letter {
         color: variables.$accent-color;
         -webkit-text-stroke: 1.5px variables.$accent-color;
-        z-index: 2;
+        z-index: 3;
       }
 
       .expand {
@@ -122,14 +121,10 @@
 .activeZone {
   position: fixed;
   top: 50%;
-  /* Centra el área activa verticalmente */
   left: 0;
   transform: translateY(-50%);
   height: 40%;
-  /* Ajusta la altura de la zona activa */
   width: 25px;
-  /* Un área pequeña para detectar el hover */
   z-index: 1;
   pointer-events: auto;
-  /* Asegura que el mouse detecte esta zona */
 }

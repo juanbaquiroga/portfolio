@@ -1,13 +1,6 @@
-"use client"
-import { motion, useInView } from "framer-motion";
+import gsap from "gsap";
 import styles from "./Icon.module.scss";
-import { useRef } from "react";
-
-type IconProps = {
-    icon: 'instagram' | 'linkedin' | 'github' | 'whatsapp';
-    link: string;
-    inView: boolean
-};
+import { useRef, useEffect } from "react";
 
 const icons = {
     instagram: (
@@ -32,53 +25,76 @@ const icons = {
     )
 }
 export const Icon = ({
-    icon="instagram",
+    icon = "instagram",
     link,
     inView = false,
-    delay= 0
-
+    delay = 0
 }: {
     icon: 'instagram' | 'linkedin' | 'github' | 'whatsapp';
     link?: string;
-    inView?: boolean
-    delay?: number
+    inView?: boolean;
+    delay?: number;
 }) => {
-    const element = icons[icon];  // Busca el 'd' correspondiente al nombre
+    const element = icons[icon];
+    const ref = useRef<HTMLAnchorElement>(null);
+
+    useEffect(() => {
+        if (!ref.current) return;
+
+        let observer: IntersectionObserver | null = null;
+        let hasAnimated = false;
+
+        const animate = () => {
+            gsap.fromTo(
+                ref.current,
+                { scale: 0, opacity: 0 },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.4,
+                    delay: delay,
+                    ease: "elastic.out(1, 0.7)"
+                }
+            );
+        };
+
+        if (inView) {
+            observer = new window.IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting && !hasAnimated) {
+                        animate();
+                        hasAnimated = true;
+                    }
+                    if (!entry.isIntersecting) {
+                        hasAnimated = false;
+                        gsap.set(ref.current, { scale: 0, opacity: 0 });
+                    }
+                },
+                { threshold: 0.1 }
+            );
+            observer.observe(ref.current);
+        } else {
+            animate();
+        }
+
+        return () => {
+            if (observer && ref.current) observer.unobserve(ref.current);
+        };
+    }, [delay, icon, inView]);
 
     if (!element) {
-        return null; // Si no se encuentra el ícono, no renderiza nada
+        return null;
     }
-    
-    const ref = useRef(null);
-    const isInView = useInView(ref, {
-        once: false,
-        margin: "100000px 0px -50px 0px"
-    });
 
     return (
-        inView?(
-            <motion.a 
+        <a
             ref={ref}
             className={styles.container}
-            initial={{opacity:0}}
-            animate={isInView ?{ scale: [0.0, 0, 1.1, 1], opacity:[0, 0, 1, 1] }:{scale:0, opacity:0}}
-            transition={delay?{duration: 0.4, delay: delay}:{duration: 0.4}}
             href={link}
-            target="_blank" rel="noopener noreferrer" 
-            >
-                {element}
-            </motion.a>
-        ):(
-            <motion.a
-            className={styles.container}
-            initial={{opacity:0}}
-            animate={{ scale: [0.0, 0, 1.1, 1], opacity:[0, 0, 1, 1] }}
-            transition={{ duration: 0.4, delay: delay }}
-            href={link}
-            target="_blank" rel="noopener noreferrer" 
-            >
-                {element}
-            </motion.a>
-        )
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            {element}
+        </a>
     );
 };
