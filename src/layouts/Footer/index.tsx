@@ -1,4 +1,3 @@
-"use client"
 import { useEffect, useRef, useState } from "react"
 import styles from "./Footer.module.scss"
 import { Icon } from "@/components/Icon"

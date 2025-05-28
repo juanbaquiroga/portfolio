@@ -1,4 +1,3 @@
-"use client"
 import gsap from "gsap";
 import styles from "./Icon.module.scss";
 import { useRef, useEffect } from "react";

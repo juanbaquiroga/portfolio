@@ -1,4 +1,3 @@
-"use client"
 import styles from "./Background.module.scss"; 
   
 export const Background = () => {

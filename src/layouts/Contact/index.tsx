@@ -1,4 +1,3 @@
-"use client";
 import styles from "./Contact.module.scss";
 import { FormEvent, useRef, useState, useEffect } from "react";
 import gsap from "gsap";

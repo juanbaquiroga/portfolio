@@ -1,4 +1,3 @@
-"use client"
 import styles from "./Projects.module.scss"
 import { useEffect, useRef, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
