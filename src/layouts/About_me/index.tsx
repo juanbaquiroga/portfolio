@@ -22,7 +22,7 @@ export const About_me = () => {
     const imgInView = useGsapInView(refImg, { margin: "100000px 0px -100px 0px" });
     const textInView1 = useGsapInView(refText1, { margin: "100000px 0px -100px 0px" });
     const textInView2 = useGsapInView(refText2, { margin: "100000px 0px -100px 0px" });
-    const buttonInView = useGsapInView(refButton, { margin: "100000px 0px -100px 0px" });
+    const buttonInView = useGsapInView(refButton, { margin: "100000px 0px -25px 0px" });
 
     useEffect(() => {
         gsap.to(refImg.current, {
