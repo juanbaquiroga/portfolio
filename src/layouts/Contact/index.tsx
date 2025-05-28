@@ -168,6 +168,7 @@ export const Contact = () => {
                                 className={styles.input}
                                 type="text"
                                 name="name"
+                                id="name"
                                 onFocus={handleFocus}
                                 onBlur={handleBlur}
                             />
@@ -183,6 +184,7 @@ export const Contact = () => {
                                 className={styles.input}
                                 type="email"
                                 name="email"
+                                id="email"
                                 onFocus={handleFocus}
                                 onBlur={handleBlur}
                             />
