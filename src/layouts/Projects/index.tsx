@@ -18,11 +18,9 @@ const title:Ititle = {
 }
 
 const ProjectCard = ({ item, selected, setSelectedId }: { item: Iproject; selected: boolean; setSelectedId: (id: string | null) => void }) => {
-  const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
-  const inView = useGsapInView(outerRef, { margin: "10000100px 0px -100px 0px" });
-
+  const inView = useGsapInView(innerRef, { margin: "10000100px 0px -100px 0px" });
+  
   useEffect(() => {
     if (inView) {
       gsap.to(innerRef.current, { scale: 1, opacity: 1, duration: 0.4, ease: "elastic.out(1.1, 1.3)" });
@@ -30,7 +28,7 @@ const ProjectCard = ({ item, selected, setSelectedId }: { item: Iproject; select
       gsap.to(innerRef.current, { scale: 0.8, opacity: 0, duration: 0.2 });
     }
   }, [inView]);
-
+  
   useEffect(() => {
     if (selected) {
       gsap.fromTo(innerRef.current,{scale: 0.6, top: "50%", left: "50%", x:"-50%", y: "-50%"}, { scale: 1, top: "50%", left: "50%", x:"-50%", y: "-50%", transformOrigin: "center center", boxShadow: "0 8px 32px rgba(0,0,0,0.18)", duration: 0.35, ease: "elastic.out(1.1, 1.3)" });
@@ -38,15 +36,15 @@ const ProjectCard = ({ item, selected, setSelectedId }: { item: Iproject; select
       gsap.fromTo(innerRef.current,{scale: 0.8,opacity:0, x: 0, y:0}, { scale: 1, opacity: 1, x:0, y:0, boxShadow: "none", duration: 0.35, transformOrigin: "center center", ease: "elastic.out(1.1, 1.3)" });
     }
   }, [selected]);
-
+  
   return (
-    <div ref={outerRef} className={styles.itemOuter}>
+    <div className={styles.itemOuter}>
       <div
         ref={innerRef}
         className={selected ? styles.itemInnerSelected : styles.itemInner}
         onClick={() => setSelectedId(item.id)}
-      >
-        <img ref={imgRef} src={item.img} alt={item.title} className={styles.img} />
+        >
+        <img src={item.img} alt={item.title} className={styles.img} />
         <div className={styles.overlay} style={{ display: selected? "flex": "none",pointerEvents: selected ? "auto" : "none", opacity: selected ? 1 : 0, transition: "opacity 0.2s" }} onClick={e => e.stopPropagation()}>
           <div className={styles.textContainer}>
             <h2 className={styles.title}>{item.title}</h2>
@@ -74,7 +72,8 @@ const ProjectCard = ({ item, selected, setSelectedId }: { item: Iproject; select
 export const Projects = () => {
   const [projects, setProjects] = useState<Iproject[] | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-
+  const backgroundRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -90,10 +89,18 @@ export const Projects = () => {
     };
     fetchData();
   }, []);
+  useEffect(() => {
+    if (selectedId) {
+      gsap.fromTo(backgroundRef.current,{opacity: 0, display: "flex"}, {display: "flex", opacity: 1, duration: 0.25, ease: "power2.out" });
+    } else {
+      gsap.fromTo(backgroundRef.current,{opacity: 1}, { opacity: 0, duration: 0.2, ease: "power2.out" });
+      gsap.to(backgroundRef.current, { delay: 0.2, duration: 0, display: "none" });
+    }
+  }, [selectedId])
 
   return (
     <section id="projects" className={styles.projects}>
-      {selectedId && <div className={styles.background} onClick={()=>setSelectedId(null)}/>}
+      <div ref={backgroundRef} className={styles.background} onClick={()=>setSelectedId(null)}/>
       <div className={styles.container} >
         <Title title={title} />
         <div className={styles.projectsContainer}>
