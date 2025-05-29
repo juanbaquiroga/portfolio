@@ -3,7 +3,6 @@ import { Background } from "@/components/Background";
 import { Main } from "@/layouts/Main";
 import Sidebar from "@/layouts/Sidebar/index.tsx";
 import { Projects } from "@/layouts/Projects";
-// import "../middleware.ts";
 import { lazy, useState, useEffect } from "react";
 
 const About_me = lazy(() => import("@/layouts/About_me").then(module => ({ default: module.About_me })));
