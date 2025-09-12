@@ -13,12 +13,12 @@ export const Footer = () => {
     const contactRef = useRef<HTMLParagraphElement | null>(null)
     const mailRef = useRef<HTMLAnchorElement | null>(null)
 
-    const svgInView = useGsapInView(svgRef as React.RefObject<HTMLElement>)
-    const lineInView = useGsapInView(lineRef)
-    const linksInView = useGsapInView(linksRef)
-    const rightsInView = useGsapInView(rightsRef)
-    const contactInView = useGsapInView(contactRef)
-    const mailInView = useGsapInView(mailRef)
+    const svgInView = useGsapInView(svgRef as any)
+    const lineInView = useGsapInView(lineRef as any)
+    const linksInView = useGsapInView(linksRef as any)
+    const rightsInView = useGsapInView(rightsRef as any)
+    const contactInView = useGsapInView(contactRef as any)
+    const mailInView = useGsapInView(mailRef as any)
 
     useEffect(() => {
         if (svgRef.current) {
