@@ -23,11 +23,11 @@ export const Contact = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
 
     // Detectar si los elementos están en vista
-    const subtitleInView = useGsapInView(subtitleRef, { margin: "100000px 0px -100px 0px" });
-    const nameInView = useGsapInView(nameRef, { margin: "100000px 0px 0px 0px" });
-    const emailInView = useGsapInView(emailRef, { margin: "100000px 0px 0px 0px" });
-    const messageInView = useGsapInView(messageRef, { margin: "100000px 0px 0px 0px" });
-    const buttonInView = useGsapInView(buttonRef, { margin: "100000px 0px 0px 0px" });
+    const subtitleInView = useGsapInView(subtitleRef as any, { margin: "100000px 0px -100px 0px" });
+    const nameInView = useGsapInView(nameRef as any, { margin: "100000px 0px 0px 0px" });
+    const emailInView = useGsapInView(emailRef as any, { margin: "100000px 0px 0px 0px" });
+    const messageInView = useGsapInView(messageRef as any, { margin: "100000px 0px 0px 0px" });
+    const buttonInView = useGsapInView(buttonRef as any, { margin: "100000px 0px 0px 0px" });
 
     // Animaciones GSAP
     useEffect(() => {
