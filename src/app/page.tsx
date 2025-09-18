@@ -1,9 +1,9 @@
 "use client";
 import { Background } from "@/components/Background";
 import { Main } from "@/layouts/Main";
-import Sidebar from "@/layouts/Sidebar/index.tsx";
 import { Projects } from "@/layouts/Projects";
 import { lazy, useState, useEffect } from "react";
+import Menu from "@/components/Menu";
 
 const About_me = lazy(() => import("@/layouts/About_me").then(module => ({ default: module.About_me })));
 const Technologies = lazy(() => import("@/layouts/Technologies").then(module => ({ default: module.Technologies })));
@@ -21,7 +21,8 @@ export default function Home() {
     return (
         <>
             <Background />
-            {!isMobile && <Sidebar />}
+            {/* {!isMobile && <Sidebar />} */}
+            <Menu useFixedPosition={true} />
             <Main />
             <About_me />
             <Projects />
