@@ -18,11 +18,19 @@ export const About_me = () => {
     const refText1 = useRef(null);
     const refText2 = useRef(null);
     const refButton = useRef(null);
+    
+    const [showPopup, setShowPopup] = useState(false);
+    
+    // URLs para los CVs en diferentes idiomas
+    const resumeUrls = {
+        english: "https://drive.google.com/uc?export=download&id=11h7PnlvkQVuhTTJpvTA4wkilR5dVrWzp",
+        spanish: "https://drive.google.com/uc?export=download&id=1m9O88R_hVeaY1Ig7HAG536Luvf6Fbzwj" 
+    };
 
-    const imgInView = useGsapInView(refImg, { margin: "100000px 0px -100px 0px" });
-    const textInView1 = useGsapInView(refText1, { margin: "100000px 0px -100px 0px" });
-    const textInView2 = useGsapInView(refText2, { margin: "100000px 0px -100px 0px" });
-    const buttonInView = useGsapInView(refButton, { margin: "100000px 0px -25px 0px" });
+    const imgInView = useGsapInView(refImg as any, { margin: "100000px 0px -100px 0px" });
+    const textInView1 = useGsapInView(refText1 as any, { margin: "100000px 0px -100px 0px" });
+    const textInView2 = useGsapInView(refText2 as any, { margin: "100000px 0px -100px 0px" });
+    const buttonInView = useGsapInView(refButton as any, { margin: "100000px 0px -25px 0px" });
 
     useEffect(() => {
         gsap.to(refImg.current, {
@@ -87,18 +95,44 @@ export const About_me = () => {
                             I'm a junior full-stack developer with a passion for building web solutions. Proficient in HTML, CSS, JavaScript, React.js, and Next.js, I thrive in both front-end and back-end development. I love to learn and collaborate on innovative projects.
                         </p>
                     </div>
-                    <a
-                        href="https://drive.google.com/uc?export=download&id=11h7PnlvkQVuhTTJpvTA4wkilR5dVrWzp"
-                        target="_blank"
+                    <button
                         className={styles.button}
                         ref={refButton}
-                        style={{ opacity: 0, transform: 'scale(0)' }} 
+                        style={{ opacity: 0, transform: 'scale(0)' }}
+                        onClick={() => setShowPopup(true)}
                     >
                         <svg className={styles.svg} viewBox="0 0 384 512">
                             <path className={styles.path} d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM216 232l0 102.1 31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31L168 232c0-13.3 10.7-24 24-24s24 10.7 24 24z" />
                         </svg>
                         Resume
-                    </a>
+                    </button>
+                    
+                    {showPopup && (
+                        <div className={styles.popupOverlay} onClick={() => setShowPopup(false)}>
+                            <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
+                                <div className={styles.popupHeader}>
+                                    <h3>Select Resume Language</h3>
+                                    <button className={styles.closeButton} onClick={() => setShowPopup(false)}>×</button>
+                                </div>
+                                <div className={styles.popupContent}>
+                                    <a 
+                                        href={resumeUrls.english}
+                                        target="_blank"
+                                        className={styles.languageButton}
+                                    >
+                                        English
+                                    </a>
+                                    <a 
+                                        href={resumeUrls.spanish}
+                                        target="_blank"
+                                        className={styles.languageButton}
+                                    >
+                                        Español
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
         </>
