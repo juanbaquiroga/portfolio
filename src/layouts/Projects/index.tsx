@@ -17,8 +17,8 @@ const title:Ititle = {
 }
 
 const ProjectCard = ({ item, selected, setSelectedId }: { item: Iproject; selected: boolean; setSelectedId: (id: string | null) => void }) => {
-  const innerRef = useRef<HTMLDivElement>(null);
-  const inView = useGsapInView(innerRef, { margin: "100000px 0px -100px 0px" });
+  const innerRef = useRef<HTMLDivElementg>(null);
+  const inView = useGsapInView(innerRef as any, { margin: "100000px 0px -100px 0px" });
   
   useEffect(() => {
     if (selected && inView) {
