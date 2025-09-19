@@ -20,7 +20,7 @@ const title:Ititle = {
 export const Technologies = ({ isMobile }: { isMobile: boolean }) => {
   const subtitleRef = useRef(null)
   const [items, setItems] = useState<Itechnology[] | null>(null)
-  const subtitleInView = useGsapInView(subtitleRef, { margin: "100000px 0px -100px 0px" })
+  const subtitleInView = useGsapInView(subtitleRef as any, { margin: "100000px 0px -100px 0px" })
 
 
 

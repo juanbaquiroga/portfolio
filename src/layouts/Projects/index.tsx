@@ -18,23 +18,17 @@ const title:Ititle = {
 
 const ProjectCard = ({ item, selected, setSelectedId }: { item: Iproject; selected: boolean; setSelectedId: (id: string | null) => void }) => {
   const innerRef = useRef<HTMLDivElement>(null);
-  const inView = useGsapInView(innerRef, { margin: "10000100px 0px -100px 0px" });
+  const inView = useGsapInView(innerRef as any, { margin: "100000px 0px -100px 0px" });
   
   useEffect(() => {
-    if (inView) {
-      gsap.to(innerRef.current, { scale: 1, opacity: 1, duration: 0.4, ease: "elastic.out(1.1, 1.3)" });
-    } else {
-      gsap.to(innerRef.current, { scale: 0.8, opacity: 0, duration: 0.2 });
-    }
-  }, [inView]);
-  
-  useEffect(() => {
-    if (selected) {
+    if (selected && inView) {
       gsap.fromTo(innerRef.current,{scale: 0.6, top: "50%", left: "50%", x:"-50%", y: "-50%"}, { scale: 1, top: "50%", left: "50%", x:"-50%", y: "-50%", transformOrigin: "center center", boxShadow: "0 8px 32px rgba(0,0,0,0.18)", duration: 0.35, ease: "elastic.out(1.1, 1.3)" });
-    } else {
+    } else if (!selected && inView){
       gsap.fromTo(innerRef.current,{scale: 0.8,opacity:0, x: 0, y:0}, { scale: 1, opacity: 1, x:0, y:0, boxShadow: "none", duration: 0.35, transformOrigin: "center center", ease: "elastic.out(1.1, 1.3)" });
+    } else {
+      gsap.fromTo(innerRef.current, {scale: 1, opacity: 1}, { scale: 0.8, opacity: 0, x: 0, y:0, duration: 0.3, ease: "elastic.out(1.1, 1.3)" });
     }
-  }, [selected]);
+  }, [selected, inView]);
   
   return (
     <div className={styles.itemOuter}>

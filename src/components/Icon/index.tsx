@@ -93,6 +93,9 @@ export const Icon = ({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
+            style={{
+                opacity: 0
+            }}
         >
             {element}
         </a>
