@@ -12,7 +12,7 @@ import { Project, Technology } from "@/interfaces";
 // Projects
 export const addProject = async (project: Omit<Project, "id">) => {
   try {
-    const docRef = await addDoc(collection(db, "projects"), project);
+    const docRef = await addDoc(collection(db, "Projects"), project);
     return docRef.id;
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -20,7 +20,7 @@ export const addProject = async (project: Omit<Project, "id">) => {
 };
 
 export const getProjects = async (): Promise<Project[]> => {
-  const querySnapshot = await getDocs(collection(db, "projects"));
+  const querySnapshot = await getDocs(collection(db, "Projects"));
   return querySnapshot.docs.map(
     (doc) => ({ id: doc.id, ...doc.data() } as Project)
   );
@@ -28,7 +28,7 @@ export const getProjects = async (): Promise<Project[]> => {
 
 export const updateProject = async (id: string, project: Partial<Project>) => {
   try {
-    await updateDoc(doc(db, "projects", id), project);
+    await updateDoc(doc(db, "Projects", id), project);
   } catch (e) {
     console.error("Error updating document: ", e);
   }
@@ -36,7 +36,7 @@ export const updateProject = async (id: string, project: Partial<Project>) => {
 
 export const deleteProject = async (id: string) => {
   try {
-    await deleteDoc(doc(db, "projects", id));
+    await deleteDoc(doc(db, "Projects", id));
   } catch (e) {
     console.error("Error deleting document: ", e);
   }
@@ -45,7 +45,7 @@ export const deleteProject = async (id: string) => {
 // Technologies
 export const addTechnology = async (technology: Omit<Technology, "id">) => {
   try {
-    const docRef = await addDoc(collection(db, "technologies"), technology);
+    const docRef = await addDoc(collection(db, "Technologies"), technology);
     return docRef.id;
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -53,7 +53,7 @@ export const addTechnology = async (technology: Omit<Technology, "id">) => {
 };
 
 export const getTechnologies = async (): Promise<Technology[]> => {
-  const querySnapshot = await getDocs(collection(db, "technologies"));
+  const querySnapshot = await getDocs(collection(db, "Technologies"));
   return querySnapshot.docs.map(
     (doc) => ({ id: doc.id, ...doc.data() } as Technology)
   );
@@ -64,7 +64,7 @@ export const updateTechnology = async (
   technology: Partial<Technology>
 ) => {
   try {
-    await updateDoc(doc(db, "technologies", id), technology);
+    await updateDoc(doc(db, "Technologies", id), technology);
   } catch (e) {
     console.error("Error updating document: ", e);
   }
@@ -72,7 +72,7 @@ export const updateTechnology = async (
 
 export const deleteTechnology = async (id: string) => {
   try {
-    await deleteDoc(doc(db, "technologies", id));
+    await deleteDoc(doc(db, "Technologies", id));
   } catch (e) {
     console.error("Error deleting document: ", e);
   }
