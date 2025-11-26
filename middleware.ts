@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
-import { initializeApp, getApps, App } from "firebase-admin/app";
-import { serviceAccount } from "@/config/serviceAccount";
+import { initializeApp, getApps } from "firebase-admin/app";
+import serviceAccount from "@/config/serviceAccount";
 
 const adminApp =
   getApps().find((app) => app.name === "admin") ||

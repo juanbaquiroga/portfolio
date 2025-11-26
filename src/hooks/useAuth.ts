@@ -51,8 +51,8 @@ export const useAuth = () => {
   };
 
   const handleSignInWithEmailAndPassword = async (
-    email,
-    password
+    email: string,
+    password: string
   ) => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
@@ -63,9 +63,9 @@ export const useAuth = () => {
   };
 
   const handleCreateUserWithEmailAndPassword = async (
-    email,
-    password,
-    displayName
+    email: string,
+    password: string,
+    displayName: any
   ) => {
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
