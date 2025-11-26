@@ -1,0 +1,256 @@
+@use "@/styles/variables.scss";
+
+$form-bg-color: rgba(255, 255, 255, 0.50);
+
+.main{
+    height: 100vh;
+    min-height: 40rem;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    position: relative;
+    
+    .container{
+        padding: 2em 0;
+        position: relative;
+        height: 80%;
+        width: 70%;
+        min-width: 900px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 2em;
+        border-radius: 1.25rem;
+        border: 2px solid rgba(255, 255, 255, 0.65);
+        background: $form-bg-color;
+        backdrop-filter: blur(2px);
+
+        .form{
+            display: flex;
+            flex-direction: column;
+            gap: .5em;
+            justify-content: center;
+            width: 60%;
+            max-height: 60%;
+
+
+            
+            .tabContent{
+                position: relative; 
+                display: block; 
+                min-height: 350px;
+                
+                
+                .stepContent {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5em;
+                    overflow-y: auto; 
+                    height: 100%; 
+                    padding: 0 1rem;
+                    
+                    .stepTitle {
+                        font-size: 1.4rem;
+                        color: variables.$accent-color;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+                }
+            }
+            .formGroup{
+                display: flex;
+                flex-direction: column;
+                gap: 0.5em;
+
+                .label{
+                    font-size: 1.1rem;
+                    color: variables.$text-color;
+                }
+                
+                .input{
+                    width: 100%;
+                    height: 2rem;
+                    border: 1px solid variables.$accent-color;
+                    border-radius: .5rem;
+                    padding-left: .5rem;
+                }
+                .imageInput{
+                    border: none;
+                }
+                .textarea{
+                    width: 100%;
+                    height: auto;
+                    resize: vertical;
+                    border: 1px solid variables.$accent-color;
+                    border-radius: .5rem;
+                    padding-left: .5rem;
+                    max-height: 6rem;
+                    min-height: 4rem;
+                }
+                .technologiesContainer{
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    max-height: 100px;
+                    overflow-y: auto;
+                    padding-right: 10px;
+
+                    .techContainer{
+                        display: inline-block;
+
+                        .checkbox{
+                            position: absolute;
+                            opacity: 0;
+                            width: 0;
+                            height: 0;
+                            &:checked + .techButton{
+                                background-color: variables.$accent-color; 
+                                color: variables.$color-1;
+                                border-color: variables.$accent-color; 
+                            }
+                        }
+
+                        .techButton{
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 0.4rem 1rem;
+                            cursor: pointer;
+                            
+                            // Diseño Píldora/Redondo
+                            border-radius: 9999px; // Alto valor para hacer el borde bien redondo
+                            border: 1px solid #ccc;
+                            
+                            background-color: variables.$bg-color;
+                            color: variables.$text-color;
+                            font-size: 0.9rem;
+                            transition: all 0.2s ease-in-out;
+
+                            &:hover {
+                                background-color: darken(variables.$bg-color, 5%);
+                            }
+                        }
+                    }
+                }
+            }
+            .linksContainer{
+                display: flex;
+                flex-direction: column;
+                gap: 0.5em;
+
+                .label{
+                    font-size: 1.1rem;
+                    color: variables.$text-color;
+                    font-weight: 500;
+                }
+
+                .linkContainer{
+                    display: flex;
+                    gap: 0.5rem;
+                    align-items: center;
+
+                    .input{
+                        flex: 1;
+                        height: 2rem;
+                        border: 1px solid variables.$accent-color;
+                        border-radius: .5rem;
+                        padding-left: .5rem;
+                    }
+
+                    .button{
+                        background-color: variables.$text-color;
+                        color: variables.$color-1;
+                        height: 2rem;
+                        width: auto;
+                        padding: 0 0.8rem;
+                        font-size: 0.85rem;
+                        transition: background-color 0.2s;
+
+                        &:hover{
+                            background-color: darken(variables.$text-color, 10%);
+                        }
+                    }
+                }
+
+                & > .button{
+                    background-color: variables.$accent-color;
+                    height: 2rem;
+                    width: 100%;
+                }
+            }
+            .error{
+                color: variables.$accent-color;
+            }
+            .button{
+                // Estilo para el botón de Submit
+                height: 2.5rem;
+                background-color: variables.$accent-color; // Usar el color principal
+                color: variables.$color-1;
+                border-radius: .5rem;
+                border: none;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background-color: darken(variables.$accent-color, 10%);
+                }
+            }
+            .formActions {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: .5rem;
+
+                .button {
+                    width: auto;
+                    flex: 1;
+                    border: none;
+                    cursor: pointer;
+                    font-weight: bold;
+                    transition: background-color 0.2s;
+                    
+                    &:hover {
+                        background-color: darken(variables.$accent-color, 10%);
+                    }
+                    
+                    &.backButton {
+                        background-color: #999;
+                        &:hover {
+                            background-color: darken(#999, 10%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .success{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border-radius: 10px;
+        z-index: 1000;
+    }
+}
+
+@media (max-width: 768px){
+    .main{
+        .container{
+            width: 90%;
+            min-width: 300px;
+           .form{
+               width: 80%;
+           }
+       }
+    }
+}

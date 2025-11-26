@@ -18,3 +18,15 @@ export interface Project {
   links: { title: string; url: string }[];
   featured: boolean;
 }
+
+export interface MenuItem {
+  label: string;
+  href?: string;
+  onClick?: () => void;
+  ariaLabel?: string;
+  rotation?: number;
+  hoverStyles?: {
+    bgColor?: string;
+    textColor?: string;
+  };
+};

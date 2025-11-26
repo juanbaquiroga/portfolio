@@ -12,6 +12,8 @@ const title: Ititle = {
     strokeDash: 2200,
     color: "color-2",
     strokeWidth: 11,
+    type: "inView",
+    duration: 0.65,
 };
 export const About_me = () => {
     const refImg = useRef(null);

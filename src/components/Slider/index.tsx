@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./Slider.module.scss";
 import { Card } from "./Card";
-import { Itechnology } from "@/interfaces/technology.interface";
+import { Technology } from "@/interfaces";
 import gsap from "gsap";
 
 export const Slider = ({
@@ -10,7 +10,7 @@ export const Slider = ({
     speed = "fast",
     pauseOnHover = true,
 }: {
-    items: Itechnology[] | null;
+    items: Technology[] | null;
     direction?: "left" | "right";
     speed?: "fast" | "normal" | "slow";
     pauseOnHover?: boolean;

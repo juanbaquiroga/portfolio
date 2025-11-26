@@ -1,0 +1,104 @@
+@use "@/styles/variables";
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    .label{
+        font-size: 1rem;
+        font-weight: 500;
+        color: variables.$text-color;
+    }
+    .control {
+        display: flex;
+        align-items: flex-start; // Alinea arriba si las alturas son diferentes
+        gap: 1.5em; // Espacio entre el botón y la previsualización
+        border-radius: 0.5rem;
+        height: 10rem;
+        background-color: variables.$color-1;
+        
+        .uploadButton {
+            // ... (Estilos de botón, sin cambios) ...
+            height: 100%;// Usamos min-width para el responsive
+            aspect-ratio: 1/1;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: variables.$accent-color;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .uploadButton .disabled{
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .singlePreviewContainer, .multiplePreviewContainer{
+            display: flex;
+            height: 100%;
+            gap: 0.5rem;
+            border-radius: .5rem;
+            overflow-x: scroll;
+            overflow-y: clip;
+            
+            
+            .previewWrapper{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                aspect-ratio: 1/1;
+                
+                .uploadedImagePreview{
+                    border-radius: 0.5rem;
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                }
+                .removePreviewButton{
+                    display: none;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    border-radius: 0.5rem;
+                    cursor: pointer;
+                    transition: all 0.5s ease-in-out;
+                    background-color: rgba(0, 0, 0, 0);
+                }
+                &:hover > .removePreviewButton{
+                    background-color: rgba(0, 0, 0, 0.5);
+                    color: variables.$color-1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
+
+
+    .hiddenFileInput {
+        display: none; 
+    }
+
+
+    .previewContainer {
+        position: relative;
+        min-width: 120px;
+        max-width: 240px;
+        aspect-ratio: 4/3;
+        border: 2px solid #ccc;
+        border-radius: 0.5rem;
+        overflow: hidden;
+
+        .uploadedImagePreview{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        // ... (Estilos de imagen y botón de remover se mantienen) ...
+    }

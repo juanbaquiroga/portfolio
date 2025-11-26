@@ -11,6 +11,8 @@ const title: Ititle = {
     strokeDash: 3000,
     color: "accent",
     strokeWidth: 9,
+    type: "inView",
+    duration: 0.65,
 };
 
 export const Contact = () => {

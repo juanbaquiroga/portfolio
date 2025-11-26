@@ -6,7 +6,8 @@ import styles from './Menu.module.scss';
 
 type MenuItem = {
   label: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
   ariaLabel?: string;
   rotation?: number;
   hoverStyles?: {
@@ -209,6 +210,12 @@ export default function BubbleMenu({
                 <a
                   role="menuitem"
                   href={item.href}
+                  onClick={(e) => {
+                    if (item.onClick) {
+                      e.preventDefault();
+                      item.onClick();
+                    }
+                  }}
                   aria-label={item.ariaLabel || item.label}
                   className={styles.pillLink}
                   style={

@@ -1,22 +1,17 @@
 import { NextResponse } from "next/server";
 import { getAuth } from "firebase-admin/auth";
-import { initializeApp, getApps } from "firebase-admin/app";
-import { serviceAccount } from "@/config/serviceAccount";
+import { initializeApp, getApps, cert } from "firebase-admin/app";
+import serviceAccount from "@/config/serviceAccount";
 import { getFirestore } from "firebase-admin/firestore";
 
 const adminApp =
   getApps().find((app) => app.name === "admin") ||
-  initializeApp(
-    {
-      credential: {
-        projectId: serviceAccount.project_id,
-        clientEmail: serviceAccount.client_email,
-        privateKey: serviceAccount.private_key,
-      },
-      databaseURL: `https://{serviceAccount.project_id}.firebaseio.com`,
-    },
-    "admin"
-  );
+
+
+  initializeApp({
+    credential: cert(serviceAccount),
+    databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`,
+  }, "admin");
 
 export async function POST(request: Request) {
   const { idToken } = await request.json();
@@ -28,7 +23,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
+  const expiresIn = 1000 * 60 * 5; // 5 days
 
   try {
     const decodedIdToken = await getAuth(adminApp).verifyIdToken(idToken);

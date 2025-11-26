@@ -5,7 +5,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 
 import { fonts } from "@/lib/fonts";
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Juanbaquiroga",
   description: "Juanba´s portfolio web",
 };
 
