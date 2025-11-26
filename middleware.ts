@@ -4,16 +4,12 @@ import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 import { initializeApp, getApps } from "firebase-admin/app";
 import serviceAccount from "@/config/serviceAccount";
-
+import { cert } from "firebase-admin/app";
 const adminApp =
   getApps().find((app) => app.name === "admin") ||
   initializeApp(
     {
-      credential: {
-        projectId: serviceAccount.project_id,
-        clientEmail: serviceAccount.client_email,
-        privateKey: serviceAccount.private_key,
-      },
+      credential: cert(serviceAccount),
     },
     "admin"
   );
@@ -37,7 +33,7 @@ export async function middleware(request: NextRequest) {
     if (!userDoc.exists || !userDoc.data()?.isAdmin) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
-    return NextResponse.next();
+  return NextResponse.next();
   } catch (error) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
