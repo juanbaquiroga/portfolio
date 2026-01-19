@@ -26,7 +26,7 @@ export const About_me = () => {
     // URLs para los CVs en diferentes idiomas
     const resumeUrls = {
         english: "https://drive.google.com/uc?export=download&id=11h7PnlvkQVuhTTJpvTA4wkilR5dVrWzp",
-        spanish: "https://drive.google.com/uc?export=download&id=1m9O88R_hVeaY1Ig7HAG536Luvf6Fbzwj" 
+        spanish: "https://drive.google.com/uc?export=download&id=1W2etoxrqexl8krGqWvh0lbTGNXFNJ_KP" 
     };
 
     const imgInView = useGsapInView(refImg as any, { margin: "100000px 0px -100px 0px" });
