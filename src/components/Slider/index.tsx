@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./Slider.module.scss";
 import { Card } from "./Card";
-import { Itechnology } from "@/interfaces/technology.interface";
+import { Technology } from "@/interfaces";
 import gsap from "gsap";
 
 export const Slider = ({
@@ -10,7 +10,7 @@ export const Slider = ({
     speed = "fast",
     pauseOnHover = true,
 }: {
-    items: Itechnology[] | null;
+    items: Technology[] | null;
     direction?: "left" | "right";
     speed?: "fast" | "normal" | "slow";
     pauseOnHover?: boolean;
@@ -24,7 +24,7 @@ export const Slider = ({
     useEffect(() => {
         const observer = new window.IntersectionObserver(
             ([entry]) => setIsInView(entry.isIntersecting),
-            { root: null, rootMargin: "100000px 0px -100px 0px", threshold: 0 }
+            { root: null, rootMargin: "100000px 0px -60px 0px", threshold: 0 }
         );
         if (scrollerRef.current) observer.observe(scrollerRef.current);
         return () => observer.disconnect();
@@ -39,12 +39,13 @@ export const Slider = ({
             const cards = Array.from(scrollerRef.current.children) as HTMLElement[];
             gsap.fromTo(
                 cards,
-                { opacity: 0, y: 20 },
+                { opacity: 0, y: 15 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.4,
-                    stagger: 0.05,
+                    duration: 0.25,
+                    delay: 0.15,
+                    stagger: 0.02,
                     ease: "power2.out"
                 }
             );
@@ -52,8 +53,8 @@ export const Slider = ({
             const cards = Array.from(scrollerRef.current.children) as HTMLElement[];
             gsap.to(cards, {
                 opacity: 0,
-                y: 20,
-                duration: 0.25,
+                y: 15,
+                duration: 0.15,
                 ease: "power2.in"
             });
         }
@@ -65,7 +66,6 @@ export const Slider = ({
         const container = containerRef.current;
         const handleMouseEnter = () => {
             container.style.animationPlayState = "paused";
-            // Si usas animación en el ul, también pausar:
             if (scrollerRef.current) {
                 scrollerRef.current.style.animationPlayState = "paused";
             }
@@ -110,13 +110,13 @@ export const Slider = ({
     const getSpeed = () => {
         if (containerRef.current) {
             const speedMapping = {
-                fast: "15s",
-                normal: "25s",
-                slow: "35s",
+                fast: "12s",
+                normal: "18s",
+                slow: "25s",
             };
             containerRef.current.style.setProperty(
                 "--animation-duration",
-                speedMapping[speed] || "30s"
+                speedMapping[speed] || "20s"
             );
         }
     };

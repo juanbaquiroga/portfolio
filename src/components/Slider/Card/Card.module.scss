@@ -1,15 +1,17 @@
 @use "@/styles/variables.scss";
+
 .card {
     height: 100%;
     aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1.5px solid rgba(160, 127, 117, 0.60);
-    background-color: rgba(160, 127, 117, 0.2);
-    border-radius: 20%;
+    border: 1px solid variables.$border-color;
+    background-color: variables.$card-bg;
+    border-radius: variables.$radius-md;
     position: relative;
     overflow: hidden;
+    transition: all variables.$transition-base;
 
     .svgWrapper, .titleWrapper {
         position: absolute;
@@ -33,6 +35,9 @@
     }
 
     &:hover {
+        border-color: variables.$border-accent;
+        box-shadow: 0 0 15px variables.$accent-glow;
+
         .svgWrapper {
             opacity: 0;
             transform: scale(1.1);
@@ -43,21 +48,22 @@
         }
     }
 
-    .svg{
-        height: 80%;
-        width: 80%;
+    .svg {
+        height: 60%;
+        width: 60%;
         display: flex;
         justify-content: center;
         align-items: center;
-        .path{
+        .path {
             color: variables.$text-color;
             fill: variables.$text-color;
         }
     }
+
     .title {
-        font-size: 1rem;
+        font-size: 0.85rem;
         font-weight: 600;
-        color: variables.$text-color;
+        color: variables.$accent-color;
         text-align: center;
         padding: 0 10px;
     }

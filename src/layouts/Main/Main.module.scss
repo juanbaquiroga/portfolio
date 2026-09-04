@@ -1,93 +1,283 @@
 @use "@/styles/variables.scss";
 
-.main{
-    height: 115vh;
-    height: 115dvh;
+.hero {
+    min-height: 100vh;
+    min-height: 100dvh;
     width: 100%;
-    padding-bottom:15vh;
-    display: grid;
-    place-items: center;
-    
-    .backgroundSvg1{
-        position: absolute;
-        bottom: -5%;
-        left: -10%;
-        width: 30vw;
-        height: auto;
-        z-index: 0;
-        fill: variables.$color-3;
-    }
-    .backgroundSvg2{
-        position: absolute;
-        top: -12%;
-        left: -7%;
-        height: 21vw;
-        width: 22vw;
-        z-index: 0;
-        fill: variables.$color-2;
-    }
-    .backgroundSvg3{
-        position: absolute;
-        top: -10%;
-        right: 0;
-        width: 25vw;
-        max-width: 40vh;
-        height: auto;
-        z-index: 0;
-        fill: variables.$color-3;
-    }
-    .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: clamp(6rem, 10vh, 8rem) clamp(1.5rem, 4vw, 4rem) 4rem clamp(1.5rem, 4vw, 4rem);
+
+    .container {
+        max-width: variables.$container-wide;
         width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: clamp(2rem, 4vw, 4.5rem);
         align-items: center;
-        position:relative;
-        overflow: hidden;
+    }
 
-        .svg {
-            position: absolute;
-            width: 70%;
-            max-width: 1800px;
-            height: auto;
-            z-index: 0;
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
 
-            .draw{
-                stroke: variables.$accent-color;
-                stroke-width: 12px;
-                fill: transparent;
-                stroke-dasharray: 2000;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-            }
-              
-            .animate {
-            stroke-dashoffset: 0;
-            }
+    .label {
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: variables.$accent-color;
+    }
+
+    .headline {
+        font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+        font-weight: 700;
+        line-height: 1.15;
+        color: variables.$text-color;
+
+        .accent {
+            background: variables.$gradient-accent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    }
+
+    .subtitle {
+        font-size: clamp(1rem, 1.3vw, 1.2rem);
+        color: variables.$text-secondary;
+        max-width: 520px;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+
+    .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: variables.$accent-color;
+        color: #fff;
+        padding: 0.9rem 1.8rem;
+        border-radius: 2rem;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: all variables.$transition-base;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        margin-top: 0.5rem;
+
+        svg {
+            transition: transform variables.$transition-base;
         }
 
-        .nameContainer{
-            background: rgba( 255, 255, 255, 0.2 );
-            backdrop-filter: blur( 6px );
-            -webkit-backdrop-filter: blur( 6px );
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: fit-content;
-            color: #000000;
-            padding: 5px 12px;
-            border: 1px solid rgba( 255, 255, 255, 0.18 );
-            max-width: none;
+        &:hover {
+            background: variables.$accent-hover;
+            box-shadow: variables.$shadow-accent;
+            transform: translateY(-2px);
 
-            h1{
-                font-size: clamp(0.5rem, 2.5vw, 3.5rem);
-                text-align: center;
-                line-height: 1;
+            svg {
+                transform: translateX(4px);
             }
         }
     }
-    .links{
+
+    .stats {
+        display: flex;
+        gap: clamp(1.5rem, 3vw, 3.5rem);
+        margin-top: 1rem;
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .statNumber {
+            font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+            font-weight: 700;
+            color: variables.$text-color;
+        }
+
+        .statLabel {
+            font-size: 0.8rem;
+            color: variables.$text-muted;
+            font-weight: 400;
+        }
+    }
+
+    // Code Window Component Styles
+    .codeWindowWrapper {
+        position: relative;
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto;
+    }
+
+    .codeWindow {
+        background: #111113;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 1.25rem;
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(233, 30, 140, 0.12);
+        display: flex;
+        flex-direction: column;
+        transition: border-color variables.$transition-base, box-shadow variables.$transition-base;
+
+        &:hover {
+            border-color: rgba(233, 30, 140, 0.25);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.7), 0 0 45px rgba(233, 30, 140, 0.2);
+        }
+    }
+
+    .windowHeader {
+        background: #161619;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 0.85rem 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .windowDots {
+        display: flex;
+        gap: 6px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    .dotRed {
+        background: #ff5f56;
+    }
+
+    .dotYellow {
+        background: #ffbd2e;
+    }
+
+    .dotGreen {
+        background: #27c93f;
+    }
+
+    .windowTitle {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.8rem;
+        color: #71717a;
+    }
+
+    .badgeJB {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 1px solid rgba(233, 30, 140, 0.4);
+        background: rgba(233, 30, 140, 0.1);
+        color: variables.$accent-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .codeBody {
+        padding: 1.5rem 1.5rem 1.25rem 1.5rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: clamp(0.78rem, 1vw, 0.88rem);
+        line-height: 1.65;
+        color: #e4e4e7;
+        overflow-x: auto;
+
+        pre {
+            margin: 0;
+            white-space: pre;
+        }
+
+        .kw {
+            color: #f472b6;
+            font-weight: 600;
+        }
+
+        .ident {
+            color: #38bdf8;
+        }
+
+        .func {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+
+        .prop {
+            color: #94a3b8;
+        }
+
+        .str {
+            color: #34d399;
+        }
+
+        .comment {
+            color: #64748b;
+            font-style: italic;
+        }
+    }
+
+    .windowFooter {
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 0.9rem 1.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .pillTag {
+        font-size: 0.72rem;
+        font-weight: 500;
+        padding: 0.3rem 0.75rem;
+        border-radius: 2rem;
+        background: rgba(233, 30, 140, 0.08);
+        border: 1px solid rgba(233, 30, 140, 0.25);
+        color: #f472b6;
+    }
+
+    // Available for work floating pill badge
+    .availableBadge {
+        position: absolute;
+        bottom: -14px;
+        left: -12px;
+        background: #141416;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 2rem;
+        padding: 0.45rem 0.95rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: #f4f4f5;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+        z-index: 2;
+
+        .pulsingDot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+    }
+
+    .socialLinks {
         position: absolute;
         bottom: 2.5%;
         right: 2.5%;
@@ -96,38 +286,83 @@
     }
 }
 
-@media (max-width: 480px) {
-    .main{
-        .container{
-            .svg {
-                width: 70vh;
-                transform: rotate(90deg);
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 8px #10b981;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+        box-shadow: 0 0 16px #10b981;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero {
+        padding-top: 7rem;
+        height: auto;
+        min-height: 100vh;
+
+        .container {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .content {
+            align-items: center;
+            text-align: center;
+        }
+
+        .headline {
+            max-width: 100%;
+        }
+
+        .subtitle {
+            max-width: 100%;
+        }
+
+        .stats {
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+
+            .stat {
+                align-items: center;
             }
-            .nameContainer{
-                h1{
-                   font-size: clamp(1rem, 2.5vh, 3.5rem);
-                }
-            }
         }
-        .backgroundSvg1{
-            height: 16vh;
-            width: auto;
-            bottom: 0;
+
+        .codeWindowWrapper {
+            margin-top: 1rem;
         }
-        .backgroundSvg2{
-            top: -7%;
-            left: -15%;
-            height: 20vh;
-            width: auto;
-        }
-        .backgroundSvg3{
-            width: auto;
-            height: 25vh;
-            max-width: none;
-        }
-        .links{
-            flex-direction: column;
+
+        .socialLinks {
+            position: relative;
+            bottom: auto;
+            right: auto;
+            justify-content: center;
+            width: 100%;
+            margin-top: 2rem;
         }
     }
 }
 
+@media (max-width: 480px) {
+    .hero {
+        .availableBadge {
+            left: 0;
+            bottom: -18px;
+            font-size: 0.72rem;
+        }
+
+        .stats {
+            gap: 1.2rem;
+        }
+
+        .codeBody {
+            padding: 1.1rem 1rem;
+            font-size: 0.74rem;
+        }
+    }
+}

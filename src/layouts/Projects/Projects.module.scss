@@ -1,220 +1,243 @@
 @use "@/styles/variables.scss";
 
-.projects{
-    margin-top: 10rem;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.projects {
+    padding: variables.$section-padding 0;
+    position: relative;
 
-    .container{
-        width: 80%;
+    .container {
+        max-width: variables.$container-wide;
+        margin: 0 auto;
+        padding: 0 clamp(1.5rem, 4vw, 4rem);
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 3.5rem;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        gap: 0.75rem;
+    }
+
+    .label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: variables.$accent-color;
+    }
+
+    .heading {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 700;
+        color: variables.$text-color;
+        letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+        font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+        color: variables.$text-secondary;
+        max-width: 550px;
+        font-weight: 300;
+    }
+
+    .filterPills {
+        display: flex;
+        gap: 0.6rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .filterPill {
+        padding: 0.5rem 1.2rem;
+        border-radius: 2rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        font-family: inherit;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: #141416;
+        color: variables.$text-secondary;
+        cursor: pointer;
+        transition: all variables.$transition-base;
+
+        &:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            color: variables.$text-color;
+        }
+
+        &.active {
+            background: variables.$accent-color;
+            border-color: variables.$accent-color;
+            color: #fff;
+            box-shadow: variables.$shadow-accent;
+        }
+    }
+
+    .projectsGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(1.5rem, 3vw, 2.5rem);
+        width: 100%;
+    }
+
+    .projectCard {
         position: relative;
-        gap: 3rem;
-    
-        .projectsContainer{
-            display: flex;
-            flex-direction: row;
-            width: calc(20vw * 3 + 1rem);
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: center;
-            
-            :nth-child(n).itemOuter{
-                aspect-ratio: 2/1;
-            }
-            :nth-child(4n + 2).itemOuter, :nth-child(4n+3).itemOuter{
-                aspect-ratio: 1/1;
+        border-radius: 1.75rem;
+        overflow: hidden;
+        aspect-ratio: 16 / 11;
+        background: #121214;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        text-decoration: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition: transform variables.$transition-base, border-color variables.$transition-base, box-shadow variables.$transition-base;
+
+        &:hover {
+            transform: translateY(-4px);
+            border-color: rgba(233, 30, 140, 0.4);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(233, 30, 140, 0.18);
+
+            .image {
+                transform: scale(1.05);
             }
 
-            .itemOuter{
-                height: 20vw;
-                width: auto;
-                
-                .itemInner{
-                    display: flex;
-                    height: 100%;
-                    max-width: 100%;
-                    padding: 0.75rem;
-                    border-radius: 1.25rem;
-                    border: 1px solid rgba(255, 255, 255, 0.9);
-                    background: rgba(255, 255, 255, 0.5);
-                    backdrop-filter: blur(3px);
-                    box-shadow: 0px 10px 20px 3px rgba(0, 0, 0, 0.05);
-                    cursor: pointer;
-
-                    img{
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: .5rem;
-                    }
-                }
-                .itemInnerSelected{
-                    position: fixed;
-                    z-index: 4;
-                    width: 45%;
-                    height: fit-content;
-                    max-height: 80%;
-                    transform-origin: center;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 1.75rem;
-                    padding: 0 0 .75rem 0;
-                    border: .25rem solid rgba(255, 255, 255, 0.75);
-                    background: rgba(255, 255, 255, 0.8);
-                    backdrop-filter: blur(2.5px);
-                    pointer-events: all;
-                    gap: 1rem;
-                    .img{
-                        border-radius: 1.5rem 1.5rem 0.2rem 0.2rem;
-                        width: 100%;
-                        max-height: 40%;
-                    }
-                    .overlay{
-                        width: 100%;
-                        height: min-content;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        gap: 1rem;
-                        .textContainer{
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            align-items: flex-start;
-                            padding: 0 1rem;
-                            gap: 0.6rem;
-                            overflow: hidden;
-                            
-                            .title{
-                                font-size: clamp(1.2rem, 2.5vw, 2.3rem);
-                                font-weight: 400;
-                            }
-                            .description{
-                                font-size: clamp(0.8rem, 2.5vw, 1.2rem);
-                                font-weight: 300;
-                                overflow: scroll;
-                            }
-                        }
-                        .buttonsContainer{
-                            width: 100%;
-                            display: flex;
-                            justify-content: center;
-                            gap: 1rem;
-                            .button{
-                                height: 2rem;
-                                line-height: 0;
-                                padding: 1rem 1.5rem;
-                                border-radius: 1rem;
-                                font-size: 1.2rem;
-                                font-weight: 400;
-                                background-color: variables.$accent-color;
-                                color: variables.$text-color;
-                                box-shadow: 0px 10px 20px 3px rgba(0, 0, 0, 0.1);
-                            }
-                        }
-                        .exit{
-                            position: fixed;
-                            top: .5rem;
-                            right: .5rem;
-                            width: 2rem;
-                            height: 2rem;
-                            border-radius: 1rem;
-                            border: .25px solid rgba(255, 255, 255, 0.9);
-                            background: rgba(255, 255, 255, 0.85);
-                            box-shadow: 0px 10px 20px 3px rgba(0, 0, 0, 0.1);
-                            backdrop-filter: blur(2.5px);
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            cursor: pointer;
-                            
-                            .svg{
-                                height: 1rem;
-                                .path{
-                                    color: variables.$accent-color;
-                                }
-                            }
-                        }
-                    }
-                }
+            .viewProjectIndicator {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
     }
-    .background{
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
+
+    .imageWrapper {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
-        z-index: 3;
-        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        overflow: hidden;
     }
-    
-}
-@media (max-width: 768px){
-    .projects{
-        margin-top: 5rem;
-        .container{
-            width: 90%;
-        
-            .projectsContainer{
-                width: 100%;
-                gap: 5vw;
-                
-                :nth-child(3n + 1).itemOuter{
-                    aspect-ratio: 2/0.8;
-                    width: 100%;
-                }
-                
-                :not(:nth-child(3n + 1).itemOuter).itemOuter{
-                    aspect-ratio: 1/0.8;
-                    width: calc(50% - 2.5vw);
-                }
 
-                .itemOuter{
-                    height: auto;
-                    padding: 0.25rem;
-                    border-radius: .75rem;
-                    .itemInner{
-                        width: 100%;
-                        height: 100%;
-                        padding: 0.25rem;
-                        border-radius: .75rem;
-                    }
-                    .itemInnerSelected{
-                        width: 90%;
-                        height: max-content;
-                        border-radius: 1rem;
+    .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-                        .img{
-                            width: 100%;
-                            max-height: 35vh;
-                            border-radius: .75rem .75rem 0 0
-                        }
-                        
-                        .overlay{
-                            height: fit-content;
-                        }
-                    }
-                }
-        
-            }
+    .gradientOverlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            180deg,
+            rgba(10, 10, 10, 0.1) 0%,
+            rgba(10, 10, 10, 0.5) 45%,
+            rgba(10, 10, 10, 0.95) 100%
+        );
+        pointer-events: none;
+    }
+
+    .cardContent {
+        position: relative;
+        z-index: 2;
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .tagsRow {
+        display: flex;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.2rem;
+    }
+
+    .techTag {
+        font-size: 0.72rem;
+        font-weight: 500;
+        padding: 0.25rem 0.65rem;
+        border-radius: 2rem;
+        background: rgba(20, 20, 22, 0.75);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #e4e4e7;
+    }
+
+    .cardTitle {
+        font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.2;
+        letter-spacing: -0.3px;
+    }
+
+    .cardDescription {
+        font-size: clamp(0.85rem, 1.1vw, 1rem);
+        color: #b4b4bb;
+        line-height: 1.5;
+        font-weight: 300;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .viewProjectIndicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: variables.$accent-color;
+        opacity: 0.85;
+        transform: translateX(-4px);
+        transition: opacity variables.$transition-base, transform variables.$transition-base;
+
+        svg {
+            transition: transform variables.$transition-base;
         }
-        
+
+        &:hover svg {
+            transform: translateX(3px);
+        }
     }
 }
-@media (max-width: 480px){
-   .projects{
-       margin-top: 0;
-   }
+
+@media (max-width: 900px) {
+    .projects {
+        .projectsGrid {
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+        }
+
+        .projectCard {
+            aspect-ratio: 16 / 12;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .projects {
+        .projectCard {
+            aspect-ratio: 1 / 1;
+            border-radius: 1.25rem;
+        }
+
+        .cardContent {
+            padding: 1.25rem;
+        }
+
+        .filterPills {
+            gap: 0.4rem;
+        }
+
+        .filterPill {
+            padding: 0.4rem 0.9rem;
+            font-size: 0.78rem;
+        }
+    }
 }

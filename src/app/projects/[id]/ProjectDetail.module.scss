@@ -1,0 +1,460 @@
+@use "@/styles/variables.scss";
+
+.page {
+    min-height: 100vh;
+    padding: clamp(6rem, 10vh, 8rem) clamp(1.5rem, 4vw, 4rem) 6rem clamp(1.5rem, 4vw, 4rem);
+    position: relative;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.topNav {
+    display: flex;
+    align-items: center;
+
+    .backLink {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: variables.$text-secondary;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color variables.$transition-base, transform variables.$transition-base;
+
+        &:hover {
+            color: variables.$accent-color;
+            transform: translateX(-4px);
+        }
+    }
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+
+    .headerMeta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: variables.$accent-color;
+        background: variables.$accent-subtle;
+        border: 1px solid variables.$border-accent;
+        padding: 0.35rem 0.85rem;
+        border-radius: 2rem;
+    }
+
+    .title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        color: variables.$text-color;
+        line-height: 1.1;
+        letter-spacing: -0.5px;
+    }
+
+    .leadDescription {
+        font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+        color: variables.$text-secondary;
+        max-width: 750px;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+
+    .actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+    }
+}
+
+.primaryBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: variables.$accent-color;
+    color: #fff;
+    padding: 0.85rem 1.8rem;
+    border-radius: 2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all variables.$transition-base;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background: variables.$accent-hover;
+        box-shadow: variables.$shadow-accent;
+        transform: translateY(-2px);
+    }
+}
+
+.secondaryBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #18181b;
+    color: variables.$text-color;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.85rem 1.8rem;
+    border-radius: 2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all variables.$transition-base;
+    cursor: pointer;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+        background: #202024;
+        transform: translateY(-2px);
+    }
+}
+
+// Carousel Styles
+.carouselSection {
+    width: 100%;
+}
+
+.carouselContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.mainImageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9.5;
+    background: #121214;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 35px rgba(233, 30, 140, 0.12);
+}
+
+.carouselImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.navButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(18, 18, 20, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: all variables.$transition-base;
+
+    &:hover {
+        background: variables.$accent-color;
+        border-color: variables.$accent-color;
+        box-shadow: variables.$shadow-accent;
+        transform: translateY(-50%) scale(1.08);
+    }
+}
+
+.prevButton {
+    left: 1.25rem;
+}
+
+.nextButton {
+    right: 1.25rem;
+}
+
+.counterBadge {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    background: rgba(18, 18, 20, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: variables.$text-secondary;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.35rem 0.85rem;
+    border-radius: 2rem;
+}
+
+.thumbnails {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+
+    .thumbBtn {
+        flex: 0 0 100px;
+        height: 60px;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        border: 2px solid transparent;
+        background: #141416;
+        cursor: pointer;
+        padding: 0;
+        transition: all variables.$transition-base;
+        opacity: 0.6;
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        &.activeThumb {
+            opacity: 1;
+            border-color: variables.$accent-color;
+            box-shadow: 0 0 15px variables.$accent-glow;
+        }
+    }
+
+    .thumbImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+// Details Grid
+.detailsGrid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.mainInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    .sectionHeading {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: variables.$text-color;
+    }
+
+    .articleContent {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        color: variables.$text-secondary;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        font-weight: 300;
+
+        .secondaryLang {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid variables.$border-color;
+            font-style: italic;
+            color: variables.$text-muted;
+        }
+    }
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebarCard {
+    background: #141416;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sidebarTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: variables.$text-color;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.82rem;
+    color: variables.$accent-color;
+}
+
+.techList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.techItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: variables.$text-secondary;
+    font-size: 0.95rem;
+
+    .techSvg {
+        width: 20px;
+        height: 20px;
+        color: variables.$accent-color;
+    }
+
+    .bulletDot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: variables.$accent-color;
+    }
+}
+
+.linksList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.linkRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 0.85rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    color: variables.$text-color;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all variables.$transition-base;
+
+    &:hover {
+        background: variables.$accent-subtle;
+        color: variables.$accent-color;
+        transform: translateX(3px);
+    }
+}
+
+// Bottom CTA
+.bottomCta {
+    margin-top: 2rem;
+
+    .ctaCard {
+        background: linear-gradient(135deg, #141418 0%, #1a1622 100%);
+        border: 1px solid rgba(233, 30, 140, 0.25);
+        border-radius: 1.5rem;
+        padding: clamp(2rem, 4vw, 3.5rem);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+
+        h3 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: variables.$text-color;
+        }
+
+        p {
+            font-size: 1rem;
+            color: variables.$text-secondary;
+            max-width: 500px;
+        }
+
+        .ctaButtons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+            justify-content: center;
+        }
+    }
+}
+
+// Loading & Not Found
+.loadingContainer,
+.notFoundContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    color: variables.$text-secondary;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: variables.$accent-color;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.notFoundContent {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    h1 {
+        font-size: 2rem;
+        color: variables.$text-color;
+    }
+
+    .backButton {
+        margin-top: 1rem;
+        display: inline-flex;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        background: variables.$accent-color;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+}
+
+@media (max-width: 850px) {
+    .detailsGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .mainImageWrapper {
+        aspect-ratio: 16 / 10;
+    }
+}

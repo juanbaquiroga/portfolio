@@ -51,9 +51,9 @@ export const Icon = ({
                 {
                     scale: 1,
                     opacity: 1,
-                    duration: 0.4,
+                    duration: 0.25,
                     delay: delay,
-                    ease: "elastic.out(1, 0.7)"
+                    ease: "power2.out"
                 }
             );
         };
@@ -70,7 +70,7 @@ export const Icon = ({
                         gsap.set(ref.current, { scale: 0, opacity: 0 });
                     }
                 },
-                { threshold: 0.1 }
+                { rootMargin: "100000px 0px -30px 0px", threshold: 0 }
             );
             observer.observe(ref.current);
         } else {

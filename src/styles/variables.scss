@@ -1,11 +1,81 @@
-$bg-color: #e5e0d8;
-$bullets-color: #d4b2a7bc;
-$bullets-colo: #E2CCC5;
-$color-1: #ece4d9;
-$accent-color: #A07F75;
-$color-2: #E1C2AB;
-$color-3: #c7a99f;
-$text-color: #2C211C;
+// ===========================
+// Dark Theme — Portfolio Redesign
+// ===========================
 
+// Primary backgrounds
+$bg-color: #0a0a0a;
+$bg-alt: #111111;
+$bg-elevated: #161616;
+
+// Card surfaces
+$card-bg: #141414;
+$card-bg-hover: #1a1a1a;
+
+// Accent — Pink/Fuchsia
+$accent-color: #e91e8c;
+$accent-hover: #ff2da0;
+$accent-glow: rgba(233, 30, 140, 0.25);
+$accent-subtle: rgba(233, 30, 140, 0.08);
+
+// Text
+$text-color: #f5f5f5;
+$text-secondary: #b0b0b0;
+$text-muted: #6a6a6a;
+
+// Borders
+$border-color: rgba(255, 255, 255, 0.08);
+$border-color-hover: rgba(255, 255, 255, 0.15);
+$border-accent: rgba(233, 30, 140, 0.3);
+
+// Misc
 $error-color: #F53F3F;
-$color-1-old: #EDE9E3;
+$success-color: #10b981;
+
+// Glassmorphism
+$glass-bg: rgba(20, 20, 20, 0.8);
+$glass-border: rgba(255, 255, 255, 0.06);
+$glass-blur: 12px;
+
+// Gradients
+$gradient-accent: linear-gradient(135deg, #e91e8c 0%, #ff6ec7 100%);
+$gradient-dark: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
+$gradient-card: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.95) 100%);
+
+// Shadows
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+$shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+$shadow-accent: 0 4px 20px rgba(233, 30, 140, 0.2);
+
+// Spacing
+$section-padding: clamp(4rem, 8vw, 8rem);
+$container-max: 1200px;
+$container-wide: 1400px;
+
+// Transitions (Faster & Snappier)
+$transition-fast: 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+$transition-base: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+$transition-slow: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+// Border radius
+$radius-sm: 0.5rem;
+$radius-md: 0.75rem;
+$radius-lg: 1rem;
+$radius-xl: 1.5rem;
+
+// ===========================
+// Legacy Variables (Admin pages)
+// ===========================
+$legacy-bg-color: #e5e0d8;
+$legacy-bullets-color: #d4b2a7bc;
+$legacy-color-1: #ece4d9;
+$legacy-accent-color: #A07F75;
+$legacy-color-2: #E1C2AB;
+$legacy-color-3: #c7a99f;
+$legacy-text-color: #2C211C;
+
+// Aliases for admin backward compatibility
+$bullets-color: $legacy-bullets-color;
+$color-1: $legacy-color-1;
+$color-2: $legacy-color-2;
+$color-3: $legacy-color-3;

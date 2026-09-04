@@ -1,245 +1,258 @@
 @use "@/styles/variables.scss";
-@use "sass:color";
 
-.about_me {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.about {
+    padding: variables.$section-padding 0;
+    background: variables.$bg-alt;
 
-  .container {
-    padding: 2em 0;
-    height: fit-content;
-    max-height: 90%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    background-color: variables.$accent-color;
-    gap: 2rem;
-    position: relative;
+    .container {
+        max-width: variables.$container-max;
+        margin: 0 auto;
+        padding: 0 clamp(1.5rem, 4vw, 4rem);
+    }
 
-    .interiorContainer {
-      width: 80%;
-      height: fit-content;
-      height: 75%;
-      max-width: 1250px;
-      display: grid;
-      grid-template-areas: "photo text1"
-                           "photo text2";
-      align-items: center;
-      gap: 2.5%;
+    .label {
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: variables.$text-muted;
+        display: block;
+        margin-bottom: 2rem;
+    }
 
-      .text1, .text2{
-        color: variables.$color-2;
-        font-size: clamp(0.5rem, 0.4rem + 1.5vh, 1.4rem);
-        line-height: 1.35;
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+    }
+
+    .textColumn {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .heading {
+        font-size: clamp(1.8rem, 3.5vw, 3rem);
+        font-weight: 700;
+        line-height: 1.2;
+        color: variables.$text-color;
+
+        .accentText {
+            color: variables.$accent-color;
+        }
+    }
+
+    .description {
+        font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+        color: variables.$text-secondary;
+        line-height: 1.7;
         font-weight: 300;
-      }
-      .text1{
-        grid-area: text1;
-        align-self: flex-end;
-      }
-      .text2{
-        grid-area: text2;
-        align-self: flex-start;
-      }
-      .photoContainer{
-        height: 75%;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .btnOutline {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.75rem 1.75rem;
+        border-radius: 2rem;
+        border: 1.5px solid variables.$accent-color;
+        color: variables.$accent-color;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: all variables.$transition-base;
+        text-decoration: none;
+
+        &:hover {
+            background: variables.$accent-color;
+            color: #fff;
+            box-shadow: variables.$shadow-accent;
+        }
+    }
+
+    .btnFilled {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.75rem;
+        border-radius: 2rem;
+        border: 1.5px solid variables.$border-color;
+        background: transparent;
+        color: variables.$text-color;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: all variables.$transition-base;
+        cursor: pointer;
+        font-family: inherit;
+
+        &:hover {
+            border-color: variables.$text-secondary;
+            background: rgba(255, 255, 255, 0.05);
+        }
+    }
+
+    .photoColumn {
         display: flex;
         justify-content: center;
         align-items: center;
-        grid-area: photo;
+    }
+
+    .photoContainer {
+        width: 100%;
+        max-width: 400px;
+        border-radius: variables.$radius-xl;
+        overflow: hidden;
+        border: 2px solid variables.$border-accent;
+        box-shadow: 0 0 40px variables.$accent-glow;
+
         .photo {
-          aspect-ratio: 10/16;
-          height: 100%;
-          width: auto;
-          max-height: 600px;
-          border-radius: 5px;
-          object-fit: cover;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+            aspect-ratio: 3/4;
         }
-      }
-
     }
 
-    .button {
-      display: flex;
-      background-color: variables.$color-2;
-      align-items: center;
-      padding: .75rem 1.5rem;
-      border-radius: 1.75rem;
-      color: variables.$text-color;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      font-family: inherit;
-
-      &:hover {
-        transform: translateY(-2px);
-        background-color: color.adjust(variables.$color-2, $lightness: 5%);
-      };
-
-      .svg {
-        height: 1rem;
-        width: 1rem;
-        margin-right: .5rem;
-        .path {
-          height: 100%;
-          width: 100%;
-          fill: variables.$text-color;
-        }
-      }
+    .footerText {
+        margin-top: 3rem;
+        text-align: center;
+        font-size: 0.85rem;
+        color: variables.$text-muted;
+        font-weight: 400;
     }
 
+    // Popup styles
     .popupOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(4px);
     }
 
     .popup {
-      padding: 1em 2em;
-      position: relative;
-      height: auto;
-      width: auto;
-      max-width: 900px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 2em;
-      border-radius: 1.25rem;
-      border: 2px solid rgba(255, 255, 255, 0.65);
-      background: rgba(255, 255, 255, 0.50);
-      backdrop-filter: blur(2px);
-      overflow: hidden;
-      animation: popupFadeIn 0.3s ease-out;
+        padding: 2rem;
+        position: relative;
+        width: auto;
+        min-width: 300px;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        border-radius: variables.$radius-lg;
+        border: 1px solid variables.$border-color;
+        background: variables.$glass-bg;
+        backdrop-filter: blur(variables.$glass-blur);
+        animation: popupFadeIn 0.3s ease-out;
     }
 
-    
     .popupHeader {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      
-      h3 {
-        margin: 0;
-        color: variables.$color-2;
-        font-size: 1.2rem;
-      }
-      
-      .closeButton {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: none;
-        border: none;
-        color: variables.$color-2;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 0;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        transition: background-color 0.2s;
-        
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.1);
+
+        h3 {
+            margin: 0;
+            color: variables.$text-color;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
-      }
+
+        .closeButton {
+            background: none;
+            border: none;
+            color: variables.$text-muted;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            transition: all variables.$transition-base;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: variables.$text-color;
+            }
+        }
     }
-    
+
     .popupContent {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
     }
-    
+
     .languageButton {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0.8rem 1rem;
-      background-color: variables.$color-2;
-      color: variables.$text-color;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: transform 0.2s, background-color 0.2s;
-      
-      &:hover {
-        transform: translateY(-2px);
-        background-color: color.adjust(variables.$color-2, $lightness: 5%);
-      }
-      
-      &:active {
-        transform: translateY(0);
-      }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        background: variables.$accent-color;
+        color: #fff;
+        border-radius: variables.$radius-md;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all variables.$transition-base;
+
+        &:hover {
+            background: variables.$accent-hover;
+            transform: translateY(-1px);
+            box-shadow: variables.$shadow-accent;
+        }
     }
-  }
 }
 
 @keyframes popupFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-@media (max-width: 768px){
-  .about_me {
-    .container {
-      height: fit-content;
-      gap: 3rem;
-      .interiorContainer {
-        padding: 0;
-        width: 90%;
-        height: fit-content;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: min-content min-content;
-        grid-template-areas: "text1 text1"
-                           "photo text2";
-        .text1,.text2{
-          font-size: clamp(0.5rem, 0.3rem + 2.5vw, 1.3rem);
+@media (max-width: 768px) {
+    .about {
+        .grid {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
         }
-        .text1{
-          align-self: flex-end;
-        }
-        .text2{
-          align-self: flex-start;
-        }
-        .photoContainer{
-          width: 100%;
-          max-height: 100%;
-          align-self: flex-start;
-          align-items: flex-start;
-          .photo{
-            width: 100%;
-            height: auto;
-            max-height: 100%;
-            max-width: 100%;
-          }
-        }
-      }
-    }
 
-  }
+        .photoColumn {
+            order: -1;
+        }
+
+        .photoContainer {
+            max-width: 280px;
+        }
+
+        .textColumn {
+            align-items: center;
+            text-align: center;
+        }
+
+        .buttons {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    }
 }

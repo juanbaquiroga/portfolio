@@ -1,6 +1,5 @@
 @use "@/styles/variables.scss";
 
-
 .svg {
     height: 15vh;
     min-height: 75px;
@@ -10,17 +9,17 @@
     justify-content: center;
     align-items: center;
 
-    .draw{
+    .draw {
         fill: transparent;
         stroke-linecap: round;
         stroke-linejoin: round;
         display: grid;
         place-items: center;
     }
-    .accent{
+    .accent {
         stroke: variables.$accent-color;
     }
-    .color2{
-        stroke: variables.$color-2;
+    .color2 {
+        stroke: variables.$text-color;
     }
 }

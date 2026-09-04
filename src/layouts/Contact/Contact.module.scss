@@ -1,105 +1,176 @@
 @use "@/styles/variables.scss";
 
-.contact{
-    height: 100vh;
-    min-height: 40rem;
-    display: flex;
-    align-items: center;
-    justify-content:center;
+.contact {
+    padding: variables.$section-padding 0;
+    background: variables.$bg-alt;
     position: relative;
-    
-    .container{
-        padding: 2em 0;
-        position: relative;
-        height: 80%;
-        width: 60%;
-        min-width: 900px;
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 0 clamp(1.5rem, 4vw, 4rem);
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 2.5rem;
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
-        gap: 2em;
-        border-radius: 1.25rem;
-        border: 2px solid rgba(255, 255, 255, 0.65);
-        background: rgba(255, 255, 255, 0.50);
-        backdrop-filter: blur(2px);
+        gap: 0.75rem;
+        align-items: center;
+    }
 
-        .subtitle{
-            text-align: center;
+    .label {
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: variables.$text-muted;
+    }
+
+    .heading {
+        font-size: clamp(1.8rem, 3.5vw, 3rem);
+        font-weight: 700;
+        color: variables.$text-color;
+        line-height: 1.2;
+
+        .accentText {
             color: variables.$accent-color;
-            font-size: 1.4rem;
-            font-weight: 400;
         }
-        .form{
-            display: flex;
-            flex-direction: column;
-            gap: .5em;
-            justify-content: center;
-            width: 40%;
-            max-height: 60%;
+    }
 
-            .formGroup{
-                display: flex;
-                flex-direction: column;
-                gap: 0.5em;
+    .subtitle {
+        font-size: 1rem;
+        color: variables.$text-secondary;
+        font-weight: 300;
+    }
 
-                .label{
-                    font-size: 1.1rem;
-                    color: variables.$text-color;
-                }
-                
-                .input{
-                    width: 100%;
-                    height: 2rem;
-                    border: 1px solid variables.$accent-color;
-                    border-radius: .5rem;
-                    padding-left: .5rem;
-                }
-                .message{
-                    width: 100%;
-                    height: auto;
-                    resize: vertical;
-                    border: 1px solid variables.$accent-color;
-                    border-radius: .5rem;
-                    padding-left: .5rem;
-                    max-height: 6rem;
-                    min-height: 4rem;
-                }
-            }
-            .error{
-                color: variables.$accent-color;
-            }
-            .button{
-                width: 100%;
-                height: 2.5rem;
-                background-color: variables.$text-color;
-                color: variables.$bg-color;
-                border-radius: .5rem;
+    .formCard {
+        background: variables.$card-bg;
+        border: 1px solid variables.$border-color;
+        border-radius: variables.$radius-lg;
+        padding: 2rem;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .formGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .formLabel {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: variables.$text-secondary;
+    }
+
+    .input, .textarea {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border: 1px solid variables.$border-color;
+        border-radius: variables.$radius-md;
+        background: variables.$bg-alt;
+        color: variables.$text-color;
+        font-size: 0.95rem;
+        font-family: inherit;
+        transition: all variables.$transition-base;
+        outline: none;
+
+        &::placeholder {
+            color: variables.$text-muted;
+        }
+
+        &:focus {
+            border-color: variables.$border-accent;
+            box-shadow: 0 0 12px variables.$accent-glow;
+        }
+    }
+
+    .textarea {
+        resize: vertical;
+        min-height: 120px;
+        max-height: 250px;
+    }
+
+    .errorContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .error {
+        color: variables.$error-color;
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
+
+    .submitButton {
+        width: 100%;
+        padding: 1rem;
+        border: none;
+        border-radius: variables.$radius-md;
+        background: variables.$accent-color;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all variables.$transition-base;
+
+        &:hover {
+            background: variables.$accent-hover;
+            box-shadow: variables.$shadow-accent;
+            transform: translateY(-1px);
+        }
+    }
+
+    .directContact {
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 0.9rem;
+        color: variables.$text-muted;
+
+        .emailLink {
+            color: variables.$accent-color;
+            font-weight: 500;
+            transition: color variables.$transition-base;
+
+            &:hover {
+                color: variables.$accent-hover;
             }
         }
     }
 
-    .success{
-        position: absolute;
-        top: 50%;
+    .success {
+        position: fixed;
+        bottom: 2rem;
         left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 20px;
-        background-color: rgba(0, 0, 0, 0.8);
-        color: #fff;
-        border-radius: 10px;
+        transform: translateX(-50%);
+        padding: 1rem 2rem;
+        background: variables.$card-bg;
+        border: 1px solid variables.$success-color;
+        color: variables.$success-color;
+        border-radius: variables.$radius-md;
         z-index: 1000;
+        font-weight: 500;
+        box-shadow: variables.$shadow-md;
     }
 }
 
-@media (max-width: 768px){
-    .contact{
-        .container{
-            width: 90%;
-            min-width: 300px;
-           .form{
-               width: 80%;
-           }
-       }
+@media (max-width: 768px) {
+    .contact {
+        .container {
+            max-width: 100%;
+        }
+
+        .formCard {
+            padding: 1.5rem;
+        }
     }
 }

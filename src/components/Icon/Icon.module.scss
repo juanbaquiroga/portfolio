@@ -1,26 +1,36 @@
 @use "@/styles/variables.scss";
 
-.container{
-    width: 4rem;
-    height: 4rem;
-    border-radius: 2rem;
-    border: .25px solid rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(2.5px);
+.container {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid variables.$border-color;
+    background: variables.$card-bg;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: all variables.$transition-base;
+    text-decoration: none;
 
-    .svg{
-        height: 70%;
-        transition: all 0.1s;
-        &:hover{
-            transform: scale(1.1);
-        }
-        .path{
-            color: variables.$accent-color;
+    &:hover {
+        border-color: variables.$border-accent;
+        background: variables.$accent-subtle;
+        box-shadow: 0 0 15px variables.$accent-glow;
+        transform: translateY(-2px);
+
+        .svg .path {
             fill: variables.$accent-color;
+        }
+    }
+
+    .svg {
+        height: 50%;
+        transition: transform variables.$transition-base;
+
+        .path {
+            fill: variables.$text-secondary;
+            transition: fill variables.$transition-base;
         }
     }
 }
