@@ -16,7 +16,7 @@ export const About_me = () => {
 
     const resumeUrls = {
         english: "https://drive.google.com/uc?export=download&id=11h7PnlvkQVuhTTJpvTA4wkilR5dVrWzp",
-        spanish: "https://drive.google.com/uc?export=download&id=1W2etoxrqexl8krGqWvh0lbTGNXFNJ_KP" 
+        spanish: "https://drive.google.com/uc?export=download&id=1W2etoxrqexl8krGqWvh0lbTGNXFNJ_KP"
     };
 
     const headingInView = useGsapInView(headingRef as any, { margin: "100000px 0px -60px 0px" });
