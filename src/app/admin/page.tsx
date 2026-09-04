@@ -255,15 +255,17 @@ export default function AdminPage() {
             Sign In with Google
           </button>
 
-          {/* Quick Local Development Access */}
-          <button
-            type="button"
-            className={styles.cancelBtn}
-            onClick={() => setDevBypass(true)}
-            style={{ fontSize: "0.82rem", textAlign: "center" }}
-          >
-            ⚡ Continue as Local Dev (Bypass Auth)
-          </button>
+          {/* Quick Local Development Access (Only available in development) */}
+          {process.env.NODE_ENV === "development" && (
+            <button
+              type="button"
+              className={styles.cancelBtn}
+              onClick={() => setDevBypass(true)}
+              style={{ fontSize: "0.82rem", textAlign: "center" }}
+            >
+              ⚡ Continue as Local Dev (Bypass Auth)
+            </button>
+          )}
         </div>
       </div>
     );
@@ -279,7 +281,7 @@ export default function AdminPage() {
         </div>
 
         <div className={styles.navActions}>
-          <Link href="/" className={styles.viewSiteLink} target="_blank">
+          <Link href="/" className={styles.viewSiteLink} target="_blank" rel="noopener noreferrer">
             <span>View Live Site</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="7" y1="17" x2="17" y2="7" />

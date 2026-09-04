@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: Checks if the requesting user is the authenticated, verified admin
+    function isAdmin() {
+      return request.auth != null 
+        && request.auth.token.email_verified == true
+        && (
+          request.auth.token.email == "juanbaquiroga@gmail.com"
+          || (
+            exists(/databases/$(database)/documents/users/$(request.auth.uid))
+            && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true
+          )
+        );
+    }
+
+    // Projects: Public can view, only Admin can create, edit, or delete
+    match /Projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Technologies: Public can view, only Admin can create, edit, or delete
+    match /Technologies/{techId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Users Collection: Users can manage their own profile, but cannot self-assign isAdmin
+    match /users/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      
+      // Prevent privilege escalation on create
+      allow create: if request.auth != null 
+        && request.auth.uid == userId 
+        && (
+          !('isAdmin' in request.resource.data) 
+          || request.resource.data.isAdmin == false 
+          || request.auth.token.email == "juanbaquiroga@gmail.com"
+        );
+        
+      // Prevent users from tampering with their own isAdmin flag on update
+      allow update: if request.auth != null && (
+        isAdmin() 
+        || (request.auth.uid == userId && request.resource.data.isAdmin == resource.data.isAdmin)
+      );
+      
+      allow delete: if isAdmin();
+    }
+  }
+}

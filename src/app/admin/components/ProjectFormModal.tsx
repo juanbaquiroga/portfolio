@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Project, Technology } from "@/interfaces";
+import { getFirebaseAuth } from "@/config/firebase";
 import styles from "../Admin.module.scss";
 
 interface ProjectFormModalProps {
@@ -80,10 +81,21 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
     }
   };
 
-  // Vercel Blob Upload Helper
+  // Vercel Blob Upload Helper with Auth Token & Content-Type
   const uploadFileToBlob = async (file: File): Promise<string> => {
+    const auth = getFirebaseAuth();
+    const token = await auth?.currentUser?.getIdToken();
+
+    const headers: Record<string, string> = {
+      "Content-Type": file.type || "image/png",
+    };
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
     const res = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}`, {
       method: "POST",
+      headers,
       body: file,
     });
     if (!res.ok) {

@@ -1,17 +1,14 @@
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!);
-serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
-export default serviceAccount
-// export const serviceAccount = {
-//   // IMPORTANT: Replace this with your actual Firebase service account key
-//   // You can generate this key in your Firebase project settings -> Service accounts
-//   type: "service_account",
-//   project_id: "your-project-id",
-//   private_key_id: "your-private-key-id",
-//   private_key: "your-private-key",
-//   client_email: "your-client-email",
-//   client_id: "your-client-id",
-//   auth_uri: "https://accounts.google.com/o/oauth2/auth",
-//   token_uri: "https://oauth2.googleapis.com/token",
-//   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-//   client_x509_cert_url: "your-client-x509-cert-url",
-// };
+let serviceAccount: any = null;
+
+try {
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+    if (serviceAccount?.private_key) {
+      serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+    }
+  }
+} catch (e) {
+  console.warn("Failed to parse FIREBASE_SERVICE_ACCOUNT_KEY:", e);
+}
+
+export default serviceAccount;

@@ -168,6 +168,7 @@ export const About_me = () => {
                                 <a 
                                     href={resumeUrls.english}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className={styles.languageButton}
                                 >
                                     English
@@ -175,6 +176,7 @@ export const About_me = () => {
                                 <a 
                                     href={resumeUrls.spanish}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className={styles.languageButton}
                                 >
                                     Español

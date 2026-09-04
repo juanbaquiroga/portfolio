@@ -158,6 +158,9 @@ export const Contact = () => {
 
                 <div className={styles.formCard}>
                     <form className={styles.form} onSubmit={handleSubmit}>
+                        {/* Web3Forms Honeypot Spam Protection */}
+                        <input type="checkbox" name="botcheck" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
                         <div ref={nameRef} className={styles.formGroup}>
                             <label htmlFor="contact-name" className={styles.formLabel}>Name</label>
                             <input
@@ -166,6 +169,7 @@ export const Contact = () => {
                                 name="name"
                                 id="contact-name"
                                 placeholder="Your name"
+                                maxLength={100}
                                 onFocus={handleFocus}
                                 onBlur={handleBlur}
                             />
@@ -178,6 +182,7 @@ export const Contact = () => {
                                 name="email"
                                 id="contact-email"
                                 placeholder="your@email.com"
+                                maxLength={150}
                                 onFocus={handleFocus}
                                 onBlur={handleBlur}
                             />
@@ -189,6 +194,7 @@ export const Contact = () => {
                                 name="message"
                                 id="contact-message"
                                 placeholder="Tell me about your project..."
+                                maxLength={3000}
                                 onFocus={handleFocus}
                                 onBlur={handleBlur}
                             />

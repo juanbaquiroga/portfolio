@@ -1,44 +1,27 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getAuth } from "firebase-admin/auth";
-import { getFirestore } from "firebase-admin/firestore";
-import { initializeApp, getApps } from "firebase-admin/app";
-import serviceAccount from "@/config/serviceAccount";
-import { cert } from "firebase-admin/app";
-const adminApp =
-  getApps().find((app) => app.name === "admin") ||
-  initializeApp(
-    {
-      credential: cert(serviceAccount),
-    },
-    "admin"
-  );
 
-export async function middleware(request: NextRequest) {
-  const session = request.cookies.get("session")?.value;
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next();
 
-  if (!session) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+  // Defensive HTTP Security Headers
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  response.headers.set("X-XSS-Protection", "1; mode=block");
 
-  try {
-    const decodedClaims = await getAuth(adminApp).verifySessionCookie(
-      session,
-      true
-    );
-    const userDoc = await getFirestore(adminApp)
-      .collection("users")
-      .doc(decodedClaims.uid)
-      .get();
-    if (!userDoc.exists || !userDoc.data()?.isAdmin) {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
-  return NextResponse.next();
-  } catch (error) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+  return response;
 }
 
 export const config = {
-  matcher: "/admin/:path*",
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    "/((?!_next/static|_next/image|favicon.ico).*)",
+  ],
 };
