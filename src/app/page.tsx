@@ -54,7 +54,7 @@ export default function Home() {
             <Highlights />
             <About_me />
             <Technologies isMobile={isMobile} />
-            <Projects />
+            <Projects isMobile={isMobile} />
             <Contact />
             <Footer />
         </>

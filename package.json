@@ -25,5 +25,8 @@
     "@types/react-dom": "^19",
     "sass": "^1.91.0",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "sharp@0.33.5": true
   }
 }

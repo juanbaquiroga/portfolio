@@ -85,7 +85,7 @@ export const Main = () => {
                         </div>
                         <div className={styles.stat} style={{ opacity: 0 }}>
                             <span className={styles.statNumber}>∞</span>
-                            <span className={styles.statLabel}>Cups of Coffee</span>
+                            <span className={styles.statLabel}>Liters of Mate 🧉</span>
                         </div>
                     </div>
                 </div>

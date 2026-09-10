@@ -83,13 +83,24 @@ const ProjectCard = ({ item, index }: { item: Project; index: number }) => {
   );
 };
 
-export const Projects = () => {
+export const Projects = ({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) => {
+  const [internalIsMobile, setInternalIsMobile] = useState(false);
   const [projects, setProjects] = useState<Project[] | null>(() => getCachedProjects());
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const headerInView = useGsapInView(headerRef as any, { margin: "100000px 0px -60px 0px" });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkMobile = () => setInternalIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const isMobile = isMobileProp ?? internalIsMobile;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -145,6 +156,14 @@ export const Projects = () => {
     return true;
   }) : [];
 
+  const sortedProjects = [...filteredProjects].sort((a, b) => {
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    return 0;
+  });
+
+  const displayedProjects = isMobile ? sortedProjects.slice(0, 6) : sortedProjects;
+
   return (
     <section id="projects" className={styles.projects}>
       <div className={styles.container}>
@@ -170,7 +189,7 @@ export const Projects = () => {
         </div>
 
         <div className={styles.projectsGrid}>
-          {filteredProjects.map((item, index) => (
+          {displayedProjects.map((item, index) => (
             <ProjectCard
               key={item.id}
               item={item}
